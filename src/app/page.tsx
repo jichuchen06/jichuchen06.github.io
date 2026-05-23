@@ -49,13 +49,6 @@ export default function Home() {
                 <a onMouseMove={onLiquidMove} className="liquid-glass-btn rounded-xl px-8 py-3.5 text-sm tracking-wider text-gray-300 font-mono">关于与联络 (ABOUT)</a>
               </div>
             </div>
-
-            <div className="grid grid-cols-2 gap-6 border-t border-white/5 pt-16 text-xs text-gray-500 md:grid-cols-4 font-mono">
-              <div><p className="text-gray-300">// CORE ENGINE</p><p className="mt-1">Midjourney V6 / Runway Gen-3 / Sora</p></div>
-              <div><p className="text-gray-300">// RECENT ACCOLADES</p><p className="mt-1">AI Film Fest Gold Winner &apos;25</p></div>
-              <div><p className="text-gray-300">// ACTIVE REGION</p><p className="mt-1">Tokyo / Las Vegas / Decentered</p></div>
-              <div><p className="text-gray-300">// STATUS</p><p className="mt-1 flex items-center gap-1 text-[#E5A93B]"><span className="h-1.5 w-1.5 rounded-full bg-[#E5A93B]" /> GENERATING NEXT</p></div>
-            </div>
           </header>
         </section>
       </main>
