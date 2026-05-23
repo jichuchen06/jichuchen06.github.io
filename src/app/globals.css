@@ -1,26 +1,20 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+:root { --background:#050505; --foreground:#ededed; }
+@theme inline { --color-background:var(--background); --color-foreground:var(--foreground); }
+body { margin:0; background:#050505; color:#ededed; font-family:Inter,system-ui,Arial,sans-serif; overflow-x:hidden; }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+.film-grain { position:fixed; inset:0; pointer-events:none; z-index:40; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E"); }
+.glass-nav { background:rgba(5,5,5,.75); backdrop-filter:blur(25px); -webkit-backdrop-filter:blur(25px); }
+.rec-dot { animation:pulse 1.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+.liquid-glass-btn { position:relative; overflow:hidden; background:rgba(255,255,255,.03); border:1.5px solid rgba(255,255,255,.07); box-shadow:0 4px 30px rgba(0,0,0,.4), inset 0 1px 1px rgba(255,255,255,.15), inset 0 -1px 2px rgba(0,0,0,.5); transition:transform .5s cubic-bezier(.16,1,.3,1), border-color .4s ease, box-shadow .4s ease; }
+.liquid-glass-btn::before { content:""; position:absolute; top:var(--y,50%); left:var(--x,50%); width:180px; height:180px; background:radial-gradient(circle, rgba(229,169,59,.28) 0%, rgba(229,169,59,.03) 55%, transparent 75%); transform:translate(-50%,-50%) scale(0); transition:transform .8s cubic-bezier(.16,1,.3,1); pointer-events:none; mix-blend-mode:screen; }
+.liquid-glass-btn:hover::before { transform:translate(-50%,-50%) scale(1.4); }
+.liquid-glass-btn:hover { transform:scale(1.03) translateY(-1px); border-color:rgba(229,169,59,.25); box-shadow:0 15px 35px rgba(229,169,59,.1), inset 0 1.5px 2px rgba(255,255,255,.35); }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:#050505; }
+::-webkit-scrollbar-thumb { background:#222; border-radius:3px; }
+::-webkit-scrollbar-thumb:hover { background:#E5A93B; }
