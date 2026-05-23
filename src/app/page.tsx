@@ -67,7 +67,7 @@ export default function Home() {
               </p>
               <div className="flex flex-wrap gap-4">
                 <a onMouseMove={onLiquidMove} href="#work" className="liquid-glass-btn rounded-xl px-8 py-3.5 text-sm font-bold tracking-wider text-white">浏览最新作品 (SHORTS)</a>
-                <a onMouseMove={onLiquidMove} className="liquid-glass-btn rounded-xl px-8 py-3.5 text-sm tracking-wider text-gray-300 font-mono">关于与联络 (ABOUT)</a>
+                <a onMouseMove={onLiquidMove} href="#about" className="liquid-glass-btn rounded-xl px-8 py-3.5 text-sm tracking-wider text-gray-300 font-mono">关于与联络 (ABOUT)</a>
               </div>
             </div>
           </header>
@@ -132,7 +132,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div id="contact" className="lg:col-span-7 flex flex-col justify-between bg-neutral-950 p-8 rounded-xl border border-white/5 font-mono">
+            <section id="contact" className="lg:col-span-7 flex flex-col justify-between bg-neutral-950 p-8 rounded-xl border border-white/5 font-mono">
               <div>
                 <h3 className="text-sm font-bold text-white mb-6 uppercase">// COGNITIVE TECH STACK (技术堆栈)</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-gray-400">
@@ -181,7 +181,7 @@ export default function Home() {
                   发送提案
                 </a>
               </div>
-            </div>
+            </section>
           </div>
         </section>
 
