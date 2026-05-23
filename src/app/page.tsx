@@ -535,11 +535,10 @@ export default function Page() {
                   onClick={() => setSelectedProjectId(project.id)}
                 >
                   <div className="relative aspect-video w-full overflow-hidden border border-white/5 group-hover:border-white/20 transition-all duration-500 rounded bg-gradient-to-br from-neutral-900 to-[#0c0c0c] scan-overlay">
-                    <video 
-                      src={project.coverSrc} 
-                      muted autoPlay loop playsInline 
-                      className="w-full h-full object-cover opacity-65 group-hover:opacity-85 group-hover:scale-103 transition-all duration-700 bg-neutral-900"
-                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    <img
+                      src={project.coverSrc}
+                      alt={project.title}
+                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-103 transition-all duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 pointer-events-none" />
                     <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end font-mono text-[10px] text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -579,11 +578,10 @@ export default function Page() {
                   onClick={() => setSelectedProjectId(project.id)}
                 >
                   <div className="relative aspect-[9/16] max-w-[360px] mx-auto overflow-hidden border border-white/5 group-hover:border-white/20 transition-all duration-500 rounded bg-gradient-to-br from-neutral-900 to-[#0c0c0c] scan-overlay">
-                    <video 
-                      src={project.coverSrc} 
-                      muted autoPlay loop playsInline 
-                      className="w-full h-full object-cover opacity-65 group-hover:opacity-85 group-hover:scale-103 transition-all duration-700 bg-neutral-900"
-                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    <img
+                      src={project.coverSrc}
+                      alt={project.title}
+                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-103 transition-all duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-85 pointer-events-none" />
                     <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end font-mono text-[10px] text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -749,8 +747,8 @@ export default function Page() {
                       </span>
                     </div>
                   </a>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                  <div className="absolute bottom-6 left-6 font-mono text-xs text-[#E5A93B]">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none"></div>
+                  <div className="absolute bottom-6 left-6 font-mono text-xs text-[#E5A93B] pointer-events-none">
                     <p>{selectedProject.engine}</p>
                   </div>
                 </div>
