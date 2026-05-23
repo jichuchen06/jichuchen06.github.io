@@ -36,17 +36,17 @@ export default function Home() {
 
           <header className="relative flex min-h-[calc(100vh-8rem)] flex-col justify-between px-6 pb-12 pt-14 md:px-10 md:pt-20">
             <div className="max-w-4xl">
-              <p className="mb-6 text-xs tracking-[0.3em] text-[#E5A93B] uppercase font-mono">// WORLD-BUILDING VIA LATENT SPACE</p>
+              <p className="mb-6 text-xs tracking-[0.3em] text-[#E5A93B] uppercase font-mono">// I am turning imagination into reality.</p>
               <h1 className="mb-8 text-5xl leading-[0.9] font-black tracking-tighter text-white uppercase md:text-8xl">
-                DIRECTING <br />
-                <span className="bg-gradient-to-r from-gray-200 via-gray-400 to-gray-700 bg-clip-text text-transparent">THE LATENT ERA.</span>
+                JICHU CHEN <br />
+                <span className="bg-gradient-to-r from-gray-200 via-gray-400 to-gray-700 bg-clip-text text-transparent">VISUAL WORKS.</span>
               </h1>
               <p className="mb-10 max-w-xl text-lg leading-relaxed font-light text-gray-400 md:text-xl">
-                我是 AIGC 视觉导演与 Prompt 架构师。通过潜空间、扩散模型以及时序神经模型，重构电影镜头美学，探索数字叙事的物理边界。
+                我是影像创作者。拥有丰富的视频制作经验，熟悉拍摄、剪辑、调色及AIGC视频创作流程，了解短片、广告及 微电影等全流程；具备甲方工作思维，能够理解业务需求、统筹项目并协调多部门高效落地内容 , 关注作品传播效果与商业价值。
               </p>
               <div className="flex flex-wrap gap-4">
                 <a onMouseMove={onLiquidMove} className="liquid-glass-btn rounded-xl px-8 py-3.5 text-sm font-bold tracking-wider text-white">浏览最新作品 (SHORTS)</a>
-                <a onMouseMove={onLiquidMove} className="liquid-glass-btn rounded-xl px-8 py-3.5 text-sm tracking-wider text-gray-300 font-mono">// 关于与联络 (ABOUT)</a>
+                <a onMouseMove={onLiquidMove} className="liquid-glass-btn rounded-xl px-8 py-3.5 text-sm tracking-wider text-gray-300 font-mono">关于与联络 (ABOUT)</a>
               </div>
             </div>
 
