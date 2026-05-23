@@ -1,6 +1,9 @@
 "use client";
 
-import type { CSSProperties, MouseEvent } from "react";
+import type { MouseEvent } from "react";
+import AboutSection from "@/components/AboutSection";
+import ContactSection from "@/components/ContactSection";
+import WorkSection from "@/components/WorkSection";
 
 function onLiquidMove(e: MouseEvent<HTMLElement>) {
   const rect = e.currentTarget.getBoundingClientRect();
@@ -21,6 +24,11 @@ export default function Home() {
           <div className="flex items-center space-x-3">
             <span className="rec-dot h-2.5 w-2.5 rounded-full bg-[#FF3B30]" />
             <span className="text-sm font-bold tracking-[0.2em] text-white uppercase">AIGC.STUDIO</span>
+          </div>
+          <div className="flex items-center gap-6 font-mono text-xs tracking-widest text-gray-400">
+            <a href="#work" className="hover:text-white">01 // WORK</a>
+            <a href="#about" className="hover:text-white">02 // ABOUT</a>
+            <a href="#contact" onMouseMove={onLiquidMove} className="liquid-glass-btn rounded-lg px-4 py-2 text-white">DIRECT CONTACT</a>
           </div>
         </div>
       </nav>
@@ -45,12 +53,16 @@ export default function Home() {
                 我是影像创作者。拥有丰富的视频制作经验，熟悉拍摄、剪辑、调色及AIGC视频创作流程，了解短片、广告及 微电影等全流程；具备甲方工作思维，能够理解业务需求、统筹项目并协调多部门高效落地内容 , 关注作品传播效果与商业价值。
               </p>
               <div className="flex flex-wrap gap-4">
-                <a onMouseMove={onLiquidMove} className="liquid-glass-btn rounded-xl px-8 py-3.5 text-sm font-bold tracking-wider text-white">浏览最新作品 (SHORTS)</a>
-                <a onMouseMove={onLiquidMove} className="liquid-glass-btn rounded-xl px-8 py-3.5 text-sm tracking-wider text-gray-300 font-mono">关于与联络 (ABOUT)</a>
+                <a onMouseMove={onLiquidMove} href="#work" className="liquid-glass-btn rounded-xl px-8 py-3.5 text-sm font-bold tracking-wider text-white">浏览最新作品 (SHORTS)</a>
+                <a onMouseMove={onLiquidMove} href="#about" className="liquid-glass-btn rounded-xl px-8 py-3.5 text-sm tracking-wider text-gray-300 font-mono">关于与联络 (ABOUT)</a>
               </div>
             </div>
           </header>
         </section>
+
+        <WorkSection />
+        <AboutSection />
+        <ContactSection />
       </main>
     </div>
   );
