@@ -777,28 +777,15 @@ export default function Page() {
                 {/* 详情右半区 */}
                 <div className="bg-neutral-950 p-6 rounded border border-white/5 font-mono text-xs flex flex-col justify-between anim-cascade-right">
                   <div className="space-y-6">
-                    <h3 className="text-white border-b border-white/10 pb-2 uppercase tracking-wider">// PROJECT METADATA</h3>
+                    <h3 className="text-white border-b border-white/10 pb-2 uppercase tracking-wider">// PROJECT METADATA（项目元信息）</h3>
                     <div>
-                      <p className="text-gray-500">CREATIVE ROLE</p>
-                      <p className="text-gray-200 mt-1">{selectedProject.role}</p>
+                      <p className="text-gray-500">CREATIVE ROLE（创作角色）</p>
+                      <p className="text-gray-200 mt-1">创作职责：{selectedProject.role}</p>
                     </div>
                     <div>
-                      <p className="text-gray-500">AIGC TOOLS PIPELINE</p>
-                      <p className="text-gray-200 mt-1">{selectedProject.pipeline}</p>
+                      <p className="text-gray-500">AIGC TOOLS PIPELINE（工具流程）</p>
+                      <p className="text-gray-200 mt-1">制作流程：{selectedProject.pipeline}</p>
                     </div>
-                    <div>
-                      <p className="text-gray-500">SEED CONSTANT</p>
-                      <p className="text-[#E5A93B] mt-1">{selectedProject.seed}</p>
-                    </div>
-                    <div>
-                      <p className="text-gray-500">COLOR GRADING</p>
-                      <p className="text-gray-200 mt-1">{selectedProject.grading}</p>
-                    </div>
-                  </div>
-                  <div className="mt-8">
-                    <button onClick={() => copyDetailPrompt(selectedProject.prompt)} onMouseMove={handleMouseMove} className="liquid-glass-btn w-full py-4 text-white font-bold uppercase text-center rounded-xl block">
-                      {copied ? '✓ COPIED TO CLIPBOARD' : '复制完整 PROMPT 架构'}
-                    </button>
                   </div>
                 </div>
               </div>
