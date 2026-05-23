@@ -8,10 +8,12 @@ interface Project {
   category: 'shorts' | 'commercials' | 'prompts';
   title: string;
   subtitle: string;
-  videoSrc: string;
+  coverSrc: string;
+  fullVideoUrl: string;
   aspectRatio: 'horizontal' | 'vertical';
   engine: string;
   prompt: string;
+  workflow: string;
   concept: string;
   role: string;
   pipeline: string;
@@ -34,10 +36,12 @@ const projectsData: Record<string, Project> = {
     category: 'shorts',
     title: '《新潮汐 / NEOTIDE》',
     subtitle: 'AIGC 电影质感科幻短片 - AI电影节最佳叙事大奖作品',
-    videoSrc: '/works/work-01-preview.mp4',
+    coverSrc: '/works/work-01-preview.mp4',
+    fullVideoUrl: '/works/work-01-preview.mp4',
     aspectRatio: 'horizontal',
     engine: '// SYSTEM: RUNWAY-GEN-3_ANAMORPHIC_LENS',
     prompt: 'A wide anamorphic shot of a futuristic Tokyo harbor at midnight, high-speed cargo boats slicing through heavy digital waves, monolithic neo-brutalist skyscrapers wrapped in decaying neon holograms, hyper-detailed cyberpunk aesthetic, photorealistic, 8k, shot on 35mm lens, cinematic low lighting, volumetric rain --ar 2.39:1 --style raw --v 6.0',
+    workflow: '从创意概念出发，先完成故事定位与视觉风格设定，再通过关键帧生成统一画面基调，随后使用 AI 视频模型生成片段，最后在剪辑软件中完成节奏、调色、声音与成片输出。',
     concept: '《新潮汐》是一部探索AI幻觉、后数字文明末日的实验短片。整个短片的生成过程避开了传统的镜头，完全依赖Midjourney生成的高保真帧图，并结合Runway的深度运动控制引擎来进行动态渲染。整部影片在微弱的冷色调与刺眼的霓虹光污染之间保持微妙的张力。',
     role: 'AI Video Director / Editor / Sound Design',
     pipeline: 'Midjourney V6 + Runway Gen-3 + DaVinci',
@@ -49,10 +53,12 @@ const projectsData: Record<string, Project> = {
     category: 'prompts',
     title: '《母体纠缠 / MATRIX ENTANGLEMENT》',
     subtitle: '基于超级变量与负向调度的多维视觉框架体系',
-    videoSrc: '/works/work-03-preview.mp4',
+    coverSrc: '/works/work-03-preview.mp4',
+    fullVideoUrl: '/works/work-03-preview.mp4',
     aspectRatio: 'horizontal',
     engine: '// SYSTEM: LATENT-RECURSIVE_PROMPT_FLOW',
     prompt: 'A high-contrast cinematic scan of glowing biometric data cables piercing through a massive limestone monolith, dark hyper-minimalist gallery, eerie green fiber-optics pulsing rhythmically, wide shot, architectural volumetric lighting, extremely clean layout, 35mm photography, volumetric mist --ar 2.39:1 --style raw',
+    workflow: '从创意概念出发，先完成故事定位与视觉风格设定，再通过关键帧生成统一画面基调，随后使用 AI 视频模型生成片段，最后在剪辑软件中完成节奏、调色、声音与成片输出。',
     concept: '本系统展示了 AIGC 的控图边界。我们建立了一套“结构化母体提示词（Structured Matrix Prompting）”系统。通过精确控制噪点比例（Denoising Strength）和语义解析分级，实现在长镜头序列中保持物体 and 光影的一致性。',
     role: 'Lead Prompt Architect',
     pipeline: 'Midjourney Matrix Blueprinting',
@@ -64,10 +70,12 @@ const projectsData: Record<string, Project> = {
     category: 'shorts',
     title: '《尘埃奥德赛 / DUST ODYSSEY》',
     subtitle: '写实废土风格叙事镜头 - 探索微观尘埃粒子动力学',
-    videoSrc: '/works/work-01-preview.mp4',
+    coverSrc: '/works/work-01-preview.mp4',
+    fullVideoUrl: '/works/work-01-preview.mp4',
     aspectRatio: 'horizontal',
     engine: '// SYSTEM: SORA-PARTICLE_SIMULATION_V2',
     prompt: 'Earthy dramatic anamorphic medium shot of a solo astronaut walking slowly through a giant rusty metallic desert, atmospheric dust particles floating in back-light, golden hour sunset glow, highly detailed, photorealistic, cinematic movie grade --ar 2.39:1 --style raw',
+    workflow: '从创意概念出发，先完成故事定位与视觉风格设定，再通过关键帧生成统一画面基调，随后使用 AI 视频模型生成片段，最后在剪辑软件中完成节奏、调色、声音与成片输出。',
     concept: '《尘埃奥德赛》重点在于对重力物理学和微观悬浮物质的AI算法控制。我们利用了高强度的粒度调节，使得环境中的沙尘在斜阳的林布兰光影下呈现出极具感官实感的分离运动。',
     role: 'Director / Visual Lead',
     pipeline: 'Midjourney + Sora + Stable Diffusion Lora',
@@ -79,10 +87,12 @@ const projectsData: Record<string, Project> = {
     category: 'prompts',
     title: '《合成黎明 / SYNTHETIC DAWN》',
     subtitle: '多模态时序融合框架 - 模拟极端自然气候与工业共生',
-    videoSrc: '/works/work-03-preview.mp4',
+    coverSrc: '/works/work-03-preview.mp4',
+    fullVideoUrl: '/works/work-03-preview.mp4',
     aspectRatio: 'horizontal',
     engine: '// SYSTEM: COGNITIVE-FLOW_WEATHER_EMULATOR',
     prompt: 'Extreme cinematic wide shot of an automated lithium refinery during an electric blizzard, crackling turquoise lightning bolts striking the towering silver exhaust stacks, dramatic high-contrast atmospheric grading, 35mm cinematic lens --ar 2.39:1',
+    workflow: '从创意概念出发，先完成故事定位与视觉风格设定，再通过关键帧生成统一画面基调，随后使用 AI 视频模型生成片段，最后在剪辑软件中完成节奏、调色、声音与成片输出。',
     concept: '此框架深入探讨了在时序生成模型中对气象学剧烈运动的干预。通过结合局部动态遮罩与闪电瞬间的高光曝光反差，使得冰川暴雪与数字火花产生的物理交互感达到影院级品质。',
     role: 'Technical Prompt Director',
     pipeline: 'Midjourney V6 + Runway Gen-3 + DaVinci Resolve',
@@ -96,10 +106,12 @@ const projectsData: Record<string, Project> = {
     category: 'commercials',
     title: '《液态重力 / LIQUID GRAVITY》',
     subtitle: 'X-LUXURY 品牌 AI 概念广告特辑',
-    videoSrc: '/works/work-02-preview.mp4',
+    coverSrc: '/works/work-02-preview.mp4',
+    fullVideoUrl: '/works/work-02-preview.mp4',
     aspectRatio: 'vertical',
     engine: '// SYSTEM: MIDJOURNEY-V6_PHYSICS_GRADING',
     prompt: 'Hyper-abstract luxury dynamic liquid gold swirling clockwise in absolute vacuum, floating high-end mechanical watch components made of polished platinum, macro lens view, focus pull, pristine obsidian reflections, hyper-detailed metallic texture, warm rembrandt studio studio light --ar 9:16 --stylize 750',
+    workflow: '从创意概念出发，先完成故事定位与视觉风格设定，再通过关键帧生成统一画面基调，随后使用 AI 视频模型生成片段，最后在剪辑软件中完成节奏、调色、声音与成片输出。',
     concept: '此项目是为知名奢侈品牌定制的 9:16 竖屏全案概念广告。主视觉旨在通过无重力环境，模拟顶级机械表配件与高粘度液态黄金的转换流动。竖屏构图能够极好地在移动端传递视觉流的张力。',
     role: 'AIGC Art Director / Keyframe Designer',
     pipeline: 'Stable Diffusion + MJ V6 + Kling AI',
@@ -111,10 +123,12 @@ const projectsData: Record<string, Project> = {
     category: 'shorts',
     title: '《旧磁铁与荒野 / ANALOG RUST》',
     subtitle: '35mm 模拟怀旧电影短片先导视觉',
-    videoSrc: '/works/work-04-preview.mp4',
+    coverSrc: '/works/work-04-preview.mp4',
+    fullVideoUrl: '/works/work-04-preview.mp4',
     aspectRatio: 'vertical',
     engine: '// SYSTEM: SORA-COHESION_TEST_PROTOTYPE',
     prompt: 'Earthy cinematic portrait shot of a rusted retro magnetic recorder resting on damp tall grass of an abandoned plains field, moody overcast sky, volumetric godrays breaking through clouds, visual imperfections, soft film grain, nostalgic analog style --ar 9:16 --style raw',
+    workflow: '从创意概念出发，先完成故事定位与视觉风格设定，再通过关键帧生成统一画面基调，随后使用 AI 视频模型生成片段，最后在剪辑软件中完成节奏、调色、声音与成片输出。',
     concept: '《旧磁铁与荒野》通过 AIGC 的生成，逆向探索上世纪70年代胶片的杂质感和光学缺陷。为了适应现代短视频的分发场景，本片实验性地使用了 9:16 构图。',
     role: 'Director / Editor',
     pipeline: 'Sora Beta + Luma Dream Machine',
@@ -126,10 +140,12 @@ const projectsData: Record<string, Project> = {
     category: 'commercials',
     title: '《霓虹脉冲 / NEON PULSE》',
     subtitle: '时尚先锋垂直视感广告 - 情感算法流动视觉',
-    videoSrc: '/works/work-02-preview.mp4',
+    coverSrc: '/works/work-02-preview.mp4',
+    fullVideoUrl: '/works/work-02-preview.mp4',
     aspectRatio: 'vertical',
     engine: '// SYSTEM: COGNITIVE-FLOW_PORTRAIT_STREAM',
     prompt: 'A fast-paced vertical portrait of a model wrapped in liquid neon light-wires, cyberpunk wet skin aesthetic, high speed camera pans, dynamic volumetric lighting, hyper-real textures --ar 9:16',
+    workflow: '从创意概念出发，先完成故事定位与视觉风格设定，再通过关键帧生成统一画面基调，随后使用 AI 视频模型生成片段，最后在剪辑软件中完成节奏、调色、声音与成片输出。',
     concept: '本作品深入探讨时尚媒介的移动化。9:16 的物理视框被视为一个流动发光体，我们将模特的脸庞与无序交织的液态光轨作为核心语言。',
     role: 'Visual Director / Stylist',
     pipeline: 'SDXL ControlNet + Runway Gen-3',
@@ -520,7 +536,7 @@ export default function Page() {
                 >
                   <div className="relative aspect-video w-full overflow-hidden border border-white/5 group-hover:border-white/20 transition-all duration-500 rounded bg-gradient-to-br from-neutral-900 to-[#0c0c0c] scan-overlay">
                     <video 
-                      src={project.videoSrc} 
+                      src={project.coverSrc} 
                       muted autoPlay loop playsInline 
                       className="w-full h-full object-cover opacity-65 group-hover:opacity-85 group-hover:scale-103 transition-all duration-700 bg-neutral-900"
                       onError={(e) => { e.currentTarget.style.display = 'none'; }}
@@ -564,7 +580,7 @@ export default function Page() {
                 >
                   <div className="relative aspect-[9/16] max-w-[360px] mx-auto overflow-hidden border border-white/5 group-hover:border-white/20 transition-all duration-500 rounded bg-gradient-to-br from-neutral-900 to-[#0c0c0c] scan-overlay">
                     <video 
-                      src={project.videoSrc} 
+                      src={project.coverSrc} 
                       muted autoPlay loop playsInline 
                       className="w-full h-full object-cover opacity-65 group-hover:opacity-85 group-hover:scale-103 transition-all duration-700 bg-neutral-900"
                       onError={(e) => { e.currentTarget.style.display = 'none'; }}
@@ -716,7 +732,23 @@ export default function Page() {
               {/* 弹窗元素级联动效部分 */}
               <div className="anim-cascade-video relative w-full bg-neutral-900 rounded overflow-hidden border border-white/10 mb-8 shadow-2xl transition-all duration-700 ease-out p-0.5" style={{ transform: 'translateY(0)' }}>
                 <div className={`relative w-full overflow-hidden rounded ${selectedProject.aspectRatio === 'vertical' ? 'aspect-[9/16] max-w-[360px] mx-auto' : 'aspect-video'}`}>
-                  <video src={selectedProject.videoSrc} muted autoPlay loop playsInline className="w-full h-full object-cover opacity-80" />
+                  <a
+                    href={selectedProject.fullVideoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative block w-full h-full cursor-pointer"
+                  >
+                    <img
+                      src={selectedProject.coverSrc}
+                      alt={selectedProject.title}
+                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-300"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span className="rounded-full border border-white/20 bg-black/40 px-6 py-3 text-xs font-mono tracking-[0.25em] text-white uppercase">
+                        CLICK TO WATCH
+                      </span>
+                    </div>
+                  </a>
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                   <div className="absolute bottom-6 left-6 font-mono text-xs text-[#E5A93B]">
                     <p>{selectedProject.engine}</p>
@@ -732,9 +764,9 @@ export default function Page() {
                     <p className="text-lg text-gray-400 font-light mt-2">{selectedProject.subtitle}</p>
                   </div>
                   <div className="bg-neutral-950 p-6 rounded border border-white/5 font-mono relative">
-                    <p className="text-xs text-[#E5A93B] mb-3 uppercase tracking-widest">// PROMPT BLUEPRINT (提示词蓝图)</p>
-                    <div className="text-sm text-gray-300 leading-relaxed bg-[#0d0d0d] p-4 rounded border border-white/5 select-all overflow-x-auto whitespace-pre-wrap">{selectedProject.prompt}</div>
-                    <span className="text-[10px] text-gray-500 mt-2 block">点击上方框内代码可直接复制</span>
+                    <p className="text-xs text-[#E5A93B] mb-3 uppercase tracking-widest">// CREATIVE WORKFLOW (创作工作流)</p>
+                    <div className="text-sm text-gray-300 leading-relaxed bg-[#0d0d0d] p-4 rounded border border-white/5 select-all overflow-x-auto whitespace-pre-wrap">{selectedProject.workflow}</div>
+                    <span className="text-[10px] text-gray-500 mt-2 block">项目流程概览</span>
                   </div>
                   <div>
                     <h3 className="text-sm font-mono text-gray-500 mb-2">// DIRECTING CONCEPT (导演阐述)</h3>
@@ -745,28 +777,15 @@ export default function Page() {
                 {/* 详情右半区 */}
                 <div className="bg-neutral-950 p-6 rounded border border-white/5 font-mono text-xs flex flex-col justify-between anim-cascade-right">
                   <div className="space-y-6">
-                    <h3 className="text-white border-b border-white/10 pb-2 uppercase tracking-wider">// PROJECT METADATA</h3>
+                    <h3 className="text-white border-b border-white/10 pb-2 uppercase tracking-wider">// PROJECT METADATA（项目元信息）</h3>
                     <div>
-                      <p className="text-gray-500">CREATIVE ROLE</p>
-                      <p className="text-gray-200 mt-1">{selectedProject.role}</p>
+                      <p className="text-gray-500">CREATIVE ROLE（创作角色）</p>
+                      <p className="text-gray-200 mt-1">创作职责：{selectedProject.role}</p>
                     </div>
                     <div>
-                      <p className="text-gray-500">AIGC TOOLS PIPELINE</p>
-                      <p className="text-gray-200 mt-1">{selectedProject.pipeline}</p>
+                      <p className="text-gray-500">AIGC TOOLS PIPELINE（工具流程）</p>
+                      <p className="text-gray-200 mt-1">制作流程：{selectedProject.pipeline}</p>
                     </div>
-                    <div>
-                      <p className="text-gray-500">SEED CONSTANT</p>
-                      <p className="text-[#E5A93B] mt-1">{selectedProject.seed}</p>
-                    </div>
-                    <div>
-                      <p className="text-gray-500">COLOR GRADING</p>
-                      <p className="text-gray-200 mt-1">{selectedProject.grading}</p>
-                    </div>
-                  </div>
-                  <div className="mt-8">
-                    <button onClick={() => copyDetailPrompt(selectedProject.prompt)} onMouseMove={handleMouseMove} className="liquid-glass-btn w-full py-4 text-white font-bold uppercase text-center rounded-xl block">
-                      {copied ? '✓ COPIED TO CLIPBOARD' : '复制完整 PROMPT 架构'}
-                    </button>
                   </div>
                 </div>
               </div>
