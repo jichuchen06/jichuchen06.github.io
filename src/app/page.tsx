@@ -398,9 +398,9 @@ export default function Page() {
             loop 
             muted 
             playsInline 
-            className="w-full h-full object-cover opacity-25 filter brightness-[0.4] contrast-[1.1]"
+            className="w-full h-full object-cover opacity-70 filter brightness-[0.8] contrast-[1.1]"
           >
-            <source src="https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0227e3dc26d36e2f69421df65f72439&profile_id=139&oauth2_token_id=57447761" type="video/mp4" />
+            <source src="/backgrounds/hero-bg.mp4" type="video/mp4" /> 
           </video>
           {/* 大银幕渐变阴影蒙版 */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-[#050505]"></div>
@@ -408,15 +408,15 @@ export default function Page() {
 
         {/* 核心叙事标题与动作指令 (首屏即刻加载淡入) */}
         <div className="relative z-10 max-w-7xl mx-auto w-full flex-grow flex flex-col justify-center transition-all duration-1000">
-          <p className="text-xs font-mono tracking-[0.3em] text-[#E5A93B] mb-6 uppercase animate-pulse">// WORLD-BUILDING VIA LATENT SPACE</p>
+          <p className="text-xs font-mono tracking-[0.3em] text-[#E5A93B] mb-6 uppercase animate-pulse">// I am turning imagination into reality</p>
           
           <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-white uppercase leading-[0.9] mb-8">
-            Directing <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 via-gray-400 to-gray-700">the Latent Era.</span>
+          VISUAL WORKS <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 via-gray-400 to-gray-700">IN THE AI ERA.</span>
           </h1>
 
           <p className="text-lg md:text-xl text-gray-400 max-w-xl font-light leading-relaxed mb-10">
-            我是 AIGC 视觉导演与 Prompt 架构师。通过潜空间、扩散模型以及时序神经模型，重构电影镜头美学，探索数字叙事的物理边界。
+            这里收录我的影像作品、广告视觉、AIGC设计。我关注故事、风格、分镜、AI技术与后期剪辑之间的完整创作流程。
           </p>
 
           {/* iOS 悬液玻璃按钮组 */}
@@ -433,7 +433,7 @@ export default function Page() {
               className="liquid-glass-btn text-gray-300 px-8 py-3.5 text-sm font-mono tracking-wider rounded-xl cursor-pointer"
               onMouseMove={handleMouseMove}
             >
-              // 关于与联络 (ABOUT)
+              关于与联系 (ABOUT)
             </a>
           </div>
         </div>
@@ -695,9 +695,9 @@ export default function Page() {
             <div className="mt-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 lg:hidden">
               <div>
                 <p className="text-xs text-gray-500">期待开展品牌联合、短片创作与商业顾问</p>
-                <p className="text-lg text-white font-bold mt-1">collaboration@aigc.studio</p>
+                <p className="text-lg text-white font-bold mt-1">jichuchen06@gmail.com</p>
               </div>
-              <a href="mailto:collaboration@aigc.studio" onMouseMove={handleMouseMove} className="liquid-glass-btn text-white px-6 py-3 text-xs font-bold uppercase rounded-lg">发送提案</a>
+              <a href="jichuchen06@gmail.com" onMouseMove={handleMouseMove} className="liquid-glass-btn text-white px-6 py-3 text-xs font-bold uppercase rounded-lg">发送提案</a>
             </div>
           </div>
 
