@@ -26,8 +26,8 @@ export default function Home() {
             <span className="text-sm font-bold tracking-[0.2em] text-white uppercase">AIGC.STUDIO</span>
           </div>
           <div className="flex items-center gap-6 font-mono text-xs tracking-widest text-gray-400">
-            <a href="#work" className="hover:text-white">01 // WORK</a>
-            <a href="#about" className="hover:text-white">02 // ABOUT</a>
+            <a href="#work" className="hover:text-white">WORK</a>
+            <a href="#about" className="hover:text-white">ABOUT</a>
             <a href="#contact" onMouseMove={onLiquidMove} className="liquid-glass-btn rounded-lg px-4 py-2 text-white">DIRECT CONTACT</a>
           </div>
         </div>
