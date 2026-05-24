@@ -17,6 +17,9 @@ interface Project {
   concept: string;
   role: string;
   pipeline: string;
+  duration: string;
+  format: string;
+  visualStrategy: string;
   seed: string;
   grading: string;
 }
@@ -34,17 +37,20 @@ const projectsData: Record<string, Project> = {
   'cyber-noir': {
     id: 'cyber-noir',
     category: 'shorts',
-    title: '《新潮汐 / NEOTIDE》',
-    subtitle: 'AIGC 电影质感科幻短片 - AI电影节最佳叙事大奖作品',
-    coverSrc: '/works/work-01-preview.mp4',
-    fullVideoUrl: '/works/work-01-preview.mp4',
+    title: '《一路速腾，一生相伴》',
+    subtitle: 'AIGC 广告短片 / 大众速腾汽车品牌宣传片',
+    coverSrc: '/works/work-01-cover.jpg',
+    fullVideoUrl: 'https://www.xinpianchang.com/a1364986?from=share&pcApp=xpc&channel=link&type=URL',
     aspectRatio: 'horizontal',
-    engine: '// SYSTEM: RUNWAY-GEN-3_ANAMORPHIC_LENS',
+    engine: '// SYSTEM: BANANA + KLING + DAVINCI',
     prompt: 'A wide anamorphic shot of a futuristic Tokyo harbor at midnight, high-speed cargo boats slicing through heavy digital waves, monolithic neo-brutalist skyscrapers wrapped in decaying neon holograms, hyper-detailed cyberpunk aesthetic, photorealistic, 8k, shot on 35mm lens, cinematic low lighting, volumetric rain --ar 2.39:1 --style raw --v 6.0',
-    workflow: '从创意概念出发，先完成故事定位与视觉风格设定，再通过关键帧生成统一画面基调，随后使用 AI 视频模型生成片段，最后在剪辑软件中完成节奏、调色、声音与成片输出。',
-    concept: '《新潮汐》是一部探索AI幻觉、后数字文明末日的实验短片。整个短片的生成过程避开了传统的镜头，完全依赖Midjourney生成的高保真帧图，并结合Runway的深度运动控制引擎来进行动态渲染。整部影片在微弱的冷色调与刺眼的霓虹光污染之间保持微妙的张力。',
-    role: 'AI Video Director / Editor / Sound Design',
-    pipeline: 'Midjourney V6 + Runway Gen-3 + DaVinci',
+    workflow: '本项目从文本创意出发，前期重点围绕叙事节奏、场景关系与空间调度进行策划，明确画面中的人物动线、镜头视角与情绪推进。制作阶段通过多参全能参考建立统一的角色、场景与镜头关系，增强画面连续性和空间可信度；后期则通过剪辑节奏、颗粒质感与影调处理，强化广告片的情绪氛围与品牌记忆点。',
+    concept: '这是一支围绕“大众速腾”展开的 AIGC 汽车广告短片，以陪伴、家庭与出行为核心情绪，结合品牌传播需求完成视觉化表达。',
+    role: '编导 / 调色 / AIGCer',
+    pipeline: 'BANANA + KLING + DaVinci',
+    duration: '01:56',
+    format: 'AIGC 汽车广告 / 横屏 16:9',
+    visualStrategy: '空间调度 / 家庭氛围 / 品牌叙事',
     seed: '33092817293',
     grading: 'Neo-noir Cyan and Decaying Amber'
   },
@@ -62,6 +68,9 @@ const projectsData: Record<string, Project> = {
     concept: '本系统展示了 AIGC 的控图边界。我们建立了一套“结构化母体提示词（Structured Matrix Prompting）”系统。通过精确控制噪点比例（Denoising Strength）和语义解析分级，实现在长镜头序列中保持物体 and 光影的一致性。',
     role: 'Lead Prompt Architect',
     pipeline: 'Midjourney Matrix Blueprinting',
+    duration: '01:56',
+    format: 'AIGC 汽车广告 / 横屏 16:9',
+    visualStrategy: '空间调度 / 家庭氛围 / 品牌叙事',
     seed: '998412039',
     grading: 'Terminal Green & Monochromatic Shadows'
   },
@@ -79,6 +88,9 @@ const projectsData: Record<string, Project> = {
     concept: '《尘埃奥德赛》重点在于对重力物理学和微观悬浮物质的AI算法控制。我们利用了高强度的粒度调节，使得环境中的沙尘在斜阳的林布兰光影下呈现出极具感官实感的分离运动。',
     role: 'Director / Visual Lead',
     pipeline: 'Midjourney + Sora + Stable Diffusion Lora',
+    duration: '01:56',
+    format: 'AIGC 汽车广告 / 横屏 16:9',
+    visualStrategy: '空间调度 / 家庭氛围 / 品牌叙事',
     seed: '10928374921',
     grading: 'Muted Earthy Ochre & Deep Amber'
   },
@@ -96,6 +108,9 @@ const projectsData: Record<string, Project> = {
     concept: '此框架深入探讨了在时序生成模型中对气象学剧烈运动的干预。通过结合局部动态遮罩与闪电瞬间的高光曝光反差，使得冰川暴雪与数字火花产生的物理交互感达到影院级品质。',
     role: 'Technical Prompt Director',
     pipeline: 'Midjourney V6 + Runway Gen-3 + DaVinci Resolve',
+    duration: '01:56',
+    format: 'AIGC 汽车广告 / 横屏 16:9',
+    visualStrategy: '空间调度 / 家庭氛围 / 品牌叙事',
     seed: '44820193872',
     grading: 'Electric Turquoise & Liquid Silver'
   },
@@ -115,6 +130,9 @@ const projectsData: Record<string, Project> = {
     concept: '此项目是为知名奢侈品牌定制的 9:16 竖屏全案概念广告。主视觉旨在通过无重力环境，模拟顶级机械表配件与高粘度液态黄金的转换流动。竖屏构图能够极好地在移动端传递视觉流的张力。',
     role: 'AIGC Art Director / Keyframe Designer',
     pipeline: 'Stable Diffusion + MJ V6 + Kling AI',
+    duration: '01:56',
+    format: 'AIGC 汽车广告 / 横屏 16:9',
+    visualStrategy: '空间调度 / 家庭氛围 / 品牌叙事',
     seed: '5561029418',
     grading: 'Warm Champagne Gold & Pitch Black'
   },
@@ -132,6 +150,9 @@ const projectsData: Record<string, Project> = {
     concept: '《旧磁铁与荒野》通过 AIGC 的生成，逆向探索上世纪70年代胶片的杂质感和光学缺陷。为了适应现代短视频的分发场景，本片实验性地使用了 9:16 构图。',
     role: 'Director / Editor',
     pipeline: 'Sora Beta + Luma Dream Machine',
+    duration: '01:56',
+    format: 'AIGC 汽车广告 / 横屏 16:9',
+    visualStrategy: '空间调度 / 家庭氛围 / 品牌叙事',
     seed: '197410293',
     grading: 'Faded Kodachrome Film emulation'
   },
@@ -149,6 +170,9 @@ const projectsData: Record<string, Project> = {
     concept: '本作品深入探讨时尚媒介的移动化。9:16 的物理视框被视为一个流动发光体，我们将模特的脸庞与无序交织的液态光轨作为核心语言。',
     role: 'Visual Director / Stylist',
     pipeline: 'SDXL ControlNet + Runway Gen-3',
+    duration: '01:56',
+    format: 'AIGC 汽车广告 / 横屏 16:9',
+    visualStrategy: '空间调度 / 家庭氛围 / 品牌叙事',
     seed: '88390129381',
     grading: 'Vibrant Acid Magenta & Deep Onyx'
   }
@@ -543,8 +567,8 @@ export default function Page() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 pointer-events-none" />
                     <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end font-mono text-[10px] text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div>
-                        <p className="text-[#E5A93B] uppercase">// COMPILING LATENT MATRIX</p>
-                        <p>RATIO: 2.39:1 // ANAMORPHIC</p>
+                        <p className="text-[#E5A93B] uppercase">AI TVC</p>
+                        <p>RATIO: 16:9 // ANAMORPHIC</p>
                       </div>
                       <span className="liquid-glass-btn px-3 py-1.5 text-white rounded-lg text-xs font-mono tracking-wide" onMouseMove={handleMouseMove}>VIEW BLUEPRINT</span>
                     </div>
@@ -554,7 +578,7 @@ export default function Page() {
                       <h3 className="text-xl font-bold text-white group-hover:text-[#E5A93B] transition duration-300">{project.title}</h3>
                       <p className="text-xs font-mono text-gray-500 mt-1">{project.subtitle}</p>
                     </div>
-                    <span className="text-xs font-mono text-gray-500">// 2026</span>
+                    <span className="text-xs font-mono text-gray-500">2026</span>
                   </div>
                 </div>
               ))}
@@ -624,7 +648,7 @@ export default function Page() {
             {/* 期待开展联合 */}
             <div className="mt-12 pt-8 border-t border-white/5 hidden lg:block">
               <p className="text-xs text-gray-500">期待开展品牌联合、短片创作与商业顾问</p>
-              <p className="text-lg text-white font-bold mt-1">collaboration@aigc.studio</p>
+              <p className="text-lg text-white font-bold mt-1">jichuchen06@gmail.com</p>
             </div>
           </div>
 
@@ -783,6 +807,18 @@ export default function Page() {
                     <div>
                       <p className="text-gray-500">AIGC TOOLS PIPELINE（工具流程）</p>
                       <p className="text-gray-200 mt-1">制作流程：{selectedProject.pipeline}</p>
+                    </div>
+                     <div>
+                      <p className="text-gray-500">DURATION（作品时长）</p>
+                      <p className="text-gray-200 mt-1">{selectedProject.duration}</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-500">FORMAT（作品格式）</p>
+                      <p className="text-gray-200 mt-1">{selectedProject.format}</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-500">VISUAL STRATEGY（视觉策略）</p>
+                      <p className="text-gray-200 mt-1">{selectedProject.visualStrategy}</p>
                     </div>
                   </div>
                 </div>
