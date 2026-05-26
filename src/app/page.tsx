@@ -599,12 +599,12 @@ export default function Page() {
           </div>
 
           {/* 右半区：精美极简 AIGC 专业核心技能与工具展示 (滚动淡入动画) */}
-          <div className="lg:col-span-7 flex flex-col justify-between bg-neutral-950 p-8 rounded-2xl border border-white/5 font-mono relative overflow-hidden scroll-animate">
+          <div className="lg:col-span-7 flex flex-col justify-between bg-neutral-950 p-8 rounded-2xl border border-white/5 font-mono relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#E5A93B]/5 rounded-full filter blur-[80px] pointer-events-none" />
             
             <div className="space-y-10">
               {/* 工具软件链展示 */}
-              <div>
+              <div className="scroll-animate" style={{ transitionDelay: '120ms' } as React.CSSProperties}>
                 <h3 className="text-sm font-bold text-white mb-6 uppercase tracking-wider flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#E5A93B]"></span>
                   // SYSTEM WORKFLOW (工具软件链)
@@ -616,7 +616,7 @@ export default function Page() {
                       key={index}
                       onMouseMove={handleMouseMove}
                       className="liquid-glass-btn h-full p-4 rounded-xl text-left border-white/5 bg-transparent hover:border-white/10 transition-all duration-300 transform hover:scale-[1.02] scroll-animate"
-                      style={{ transitionDelay: `${index * 120}ms` } as React.CSSProperties}
+                      style={{ transitionDelay: `${260 + index * 220}ms` } as React.CSSProperties}
                     >
                       <h4 className="text-xs font-bold text-white tracking-wide">{tool.name}</h4>
                       <p className="text-[11px] text-gray-400 font-light mt-1.5">{tool.desc}</p>
@@ -627,15 +627,15 @@ export default function Page() {
             </div>
 
             {/* 社交媒体矩阵 */}
-            <div className="mt-12">
+            <div className="mt-12 scroll-animate" style={{ transitionDelay: '260ms' } as React.CSSProperties}>
               <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">// CONNECT CHANNELS (社交与媒体连接)</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                <a href="https://space.bilibili.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '120ms' } as React.CSSProperties}>BILIBILI ↗</a>
-                <a href="https://www.xiaohongshu.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '240ms' } as React.CSSProperties}>小红书 ↗</a>
-                <a href="https://www.youtube.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '360ms' } as React.CSSProperties}>YOUTUBE ↗</a>
-                <a href="https://www.instagram.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '480ms' } as React.CSSProperties}>INSTAGRAM ↗</a>
-                <a href="https://x.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '600ms' } as React.CSSProperties}>TWITTER / X ↗</a>
-                <button onClick={() => copyWeChatID('aigc_director_wechat')} onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '720ms' } as React.CSSProperties}>{wxCopied ? '✓ WX COPIED' : 'WECHAT ↗'}</button>
+                <a href="https://space.bilibili.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '520ms' } as React.CSSProperties}>BILIBILI ↗</a>
+                <a href="https://www.xiaohongshu.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '700ms' } as React.CSSProperties}>小红书 ↗</a>
+                <a href="https://www.youtube.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '880ms' } as React.CSSProperties}>YOUTUBE ↗</a>
+                <a href="https://www.instagram.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '1060ms' } as React.CSSProperties}>INSTAGRAM ↗</a>
+                <a href="https://x.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '1240ms' } as React.CSSProperties}>TWITTER / X ↗</a>
+                <button onClick={() => copyWeChatID('aigc_director_wechat')} onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '1420ms' } as React.CSSProperties}>{wxCopied ? '✓ WX COPIED' : 'WECHAT ↗'}</button>
               </div>
             </div>
 
