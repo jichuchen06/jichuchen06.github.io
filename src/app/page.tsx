@@ -1,6 +1,18 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
+import BlurText from '@/components/BlurText';
+
+const CircularGallery = dynamic(() => import('@/components/CircularGallery'), {
+  ssr: false,
+}) as React.ComponentType<{
+  items: { image: string; text: string }[];
+  bend?: number;
+  textColor?: string;
+  borderRadius?: number;
+  scrollEase?: number;
+}>;
 
 // 项目数据模型
 interface Project {
@@ -289,6 +301,11 @@ export default function Page() {
   const verticalProjects = Object.values(projectsData).filter(
     p => p.aspectRatio === 'vertical'
   );
+  const gallerySourceProjects = horizontalProjects.length >= 3 ? horizontalProjects : Object.values(projectsData);
+  const galleryItems = gallerySourceProjects.map(project => ({
+    image: project.coverSrc,
+    text: project.title,
+  }));
 
   const getProjectBadge = (project: Project) => {
     if (project.format) return project.format.split('/')[0].trim();
@@ -412,6 +429,25 @@ export default function Page() {
         .anim-cascade-video { animation: cascadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .anim-cascade-left { animation: cascadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards; opacity: 0; }
         .anim-cascade-right { animation: cascadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards; opacity: 0; }
+
+        @keyframes blurTextIn {
+          from {
+            opacity: 0;
+            filter: blur(10px);
+            transform: translate3d(0, var(--blur-from-y, 0.7em), 0);
+          }
+          to {
+            opacity: 1;
+            filter: blur(0);
+            transform: translate3d(0, 0, 0);
+          }
+        }
+        .blur-text-unit {
+          display: inline-block;
+          opacity: 0;
+          will-change: transform, filter, opacity;
+          animation: blurTextIn 700ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
       `}} />
 
       <div className="film-grain" />
@@ -423,18 +459,18 @@ export default function Page() {
       </div>
 
       {/* Header */}
-      <nav className="fixed w-full z-50 bg-[#050505]/75 backdrop-blur-[25px] border-b border-white/5 transition-all duration-1000 ease-out translate-y-0 opacity-100">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center gap-3">
+      <nav className="fixed w-full max-w-full overflow-hidden z-50 bg-[#050505]/75 backdrop-blur-[25px] border-b border-white/5 transition-all duration-1000 ease-out translate-y-0 opacity-100">
+        <div className="max-w-7xl mx-auto w-full px-2 md:px-6 py-3 md:py-4 flex justify-between items-center gap-2 md:gap-3">
           <div className="flex items-center space-x-3 group cursor-pointer">
             <span className="w-2.5 h-2.5 bg-[#FF3B30] rounded-full rec-dot"></span>
-            <span className="text-sm tracking-[0.2em] font-bold text-white uppercase group-hover:text-[#E5A93B] transition duration-300">AIGC.STUDIO</span>
+            <span className="text-[11px] md:text-sm tracking-[0.12em] md:tracking-[0.2em] font-bold text-white uppercase group-hover:text-[#E5A93B] transition duration-300">AIGC.STUDIO</span>
           </div>
-          <div className="font-mono text-[10px] md:text-xs tracking-[0.12em] md:tracking-[0.25em] text-gray-400 flex items-center gap-3 md:gap-6 whitespace-nowrap">
+          <div className="font-mono text-[10px] md:text-xs tracking-[0.12em] md:tracking-[0.25em] text-gray-400 flex items-center gap-2 md:gap-6 whitespace-nowrap min-w-0">
             <a href="#work-section" className="hover:text-white transition duration-300">01 // WORK</a>
             <a href="#about-section" className="hover:text-white transition duration-300">02 // ABOUT</a>
             <a 
               href="mailto:director@aigc.studio" 
-              className="liquid-glass-btn text-white px-3 md:px-4 py-1.5 md:py-2 text-[10px] md:text-xs font-mono tracking-[0.08em] md:tracking-wider rounded-lg"
+              className="liquid-glass-btn text-white px-2 md:px-4 py-1.5 md:py-2 text-[10px] md:text-xs font-mono tracking-[0.05em] md:tracking-wider rounded-lg shrink-0"
               onMouseMove={handleMouseMove}
             >
               <span className="md:hidden">CONTACT</span>
@@ -465,10 +501,22 @@ export default function Page() {
         <div className="relative z-10 max-w-7xl mx-auto w-full flex-grow flex flex-col justify-center transition-all duration-1000">
           <p className="text-xs font-mono tracking-[0.3em] text-[#E5A93B] mb-6 uppercase animate-pulse">// I am turning imagination into reality</p>
           
-          <h1 className="text-5xl md:text-8xl font-black tracking-tighter text-white uppercase leading-[0.9] mb-8">
-          VISUAL WORKS <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-200 via-gray-400 to-gray-700">IN THE AI ERA.</span>
-          </h1>
+          <div className="text-5xl md:text-8xl font-black tracking-tighter text-white uppercase leading-[0.9] mb-8">
+            <BlurText
+              text="VISUAL WORKS"
+              delay={90}
+              animateBy="letters"
+              direction="top"
+              className="block whitespace-nowrap"
+            />
+            <BlurText
+              text="IN THE AI ERA."
+              delay={70}
+              animateBy="letters"
+              direction="bottom"
+              className="block whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r from-gray-200 via-gray-400 to-gray-700"
+            />
+          </div>
 
           <p className="text-lg md:text-xl text-gray-400 max-w-xl font-light leading-relaxed mb-10">
             这里收录我的影像作品、广告视觉、AIGC设计。我关注故事、风格、分镜、AI技术与后期剪辑之间的完整创作流程。
@@ -493,25 +541,15 @@ export default function Page() {
           </div>
         </div>
 
-        {/* 底部仪表盘元数据信息 */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-2 md:grid-cols-4 gap-6 pt-16 border-t border-white/5 text-xs font-mono text-gray-500">
-          <div>
-            <p className="text-gray-300">// CORE ENGINE</p>
-            <p className="mt-1">Midjourney V6 / Runway Gen-3 / Sora</p>
-          </div>
-          <div>
-            <p className="text-gray-300">// RECENT ACCOLADES</p>
-            <p className="mt-1">AI Film Fest Gold Winner '25</p>
-          </div>
-          <div>
-            <p className="text-gray-300">// ACTIVE REGION</p>
-            <p className="mt-1">Tokyo / Las Vegas / Decentered</p>
-          </div>
-          <div>
-            <p className="text-gray-300">// STATUS</p>
-            <p className="mt-1 text-[#E5A93B] flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E5A93B]"></span> GENERATING NEXT
-            </p>
+        <div className="relative z-10 max-w-7xl mx-auto w-full pt-12 md:pt-16 border-t border-white/5">
+          <div className="h-[240px] md:h-[360px] w-full overflow-hidden rounded border border-white/10 bg-black/60">
+            <CircularGallery
+              items={galleryItems}
+              bend={3}
+              textColor="#ffffff"
+              borderRadius={0.05}
+              scrollEase={0.02}
+            />
           </div>
         </div>
       </header>
@@ -534,11 +572,11 @@ export default function Page() {
               <span className="w-1.5 h-1.5 bg-[#E5A93B] rounded-full"></span>
               <h2 className="text-sm font-mono text-[#E5A93B] tracking-[0.25em] uppercase">横屏电影院线 // CINEMATIC REELS (16:9 / 2.39:1)</h2>
             </div>
-            <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-2 px-2 md:px-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
               {horizontalProjects.map((project, index) => (
                 <div 
                   key={project.id} 
-                  className="group cursor-pointer w-[80vw] md:w-[460px] lg:w-[500px] shrink-0 snap-start transition-transform duration-500 hover:-translate-y-1 scroll-animate"
+                  className="group cursor-pointer w-full transition-transform duration-500 hover:-translate-y-1 scroll-animate"
                   style={{ transitionDelay: `${index * 150}ms` } as React.CSSProperties} // 递增卡片级联动效
                   onClick={() => setSelectedProjectId(project.id)}
                 >
