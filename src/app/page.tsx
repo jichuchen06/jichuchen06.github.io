@@ -527,8 +527,8 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full pt-8 md:pt-10 border-t border-white/5">
-          <div className="relative h-[280px] md:h-[420px] w-full overflow-hidden">
+        <div className="relative z-10 max-w-7xl mx-auto w-full mt-6 md:mt-8 mb-0">
+          <div className="relative h-[220px] md:h-[280px] w-full overflow-hidden">
             <CircularGallery
               items={galleryItems}
               bend={3}

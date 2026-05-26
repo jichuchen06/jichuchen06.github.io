@@ -25,7 +25,7 @@ export default function CircularGallery({
         {repeated.map((item, index) => (
           <div className="circular-gallery-item" key={`${item.text}-${index}`}>
             <img src={item.image} alt={item.text || 'project cover'} loading="lazy" />
-            {item.text ? <div className="circular-gallery-label">{item.text}</div> : null}
+            {item.text?.trim() ? <div className="circular-gallery-label">{item.text}</div> : null}
           </div>
         ))}
       </div>
