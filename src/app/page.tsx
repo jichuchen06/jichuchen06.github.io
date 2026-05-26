@@ -202,10 +202,10 @@ const coreCapabilities: SkillItem[] = [
 
 // 软件堆栈
 const softwareStack = [
-  { name: "Midjourney V6", desc: "高精概念与无瑕关键帧制图" },
-  { name: "ComfyUI & SD", desc: "精密节点流与模型微调训练" },
-  { name: "Runway & Sora", desc: "新一代AI时序动态模拟合成" },
-  { name: "DaVinci Resolve", desc: "影视色彩科学、剪辑后期管线" }
+  { name: "Premiere Pro / After Effects", desc: "剪辑节奏 / 动态包装 / 字幕设计 / 视觉合成" },
+  { name: "DaVinci Resolve", desc: "影像调色 / 颗粒质感 / 色彩管理 / 最终输出" },
+  { name: "TapNow / AI Platform", desc: "AI 视频流程 / 模板化生产 / 内容提效" },
+  { name: "Codex / AI Coding", desc: "网站搭建 / 交互原型 / 工作流自动化 / 代码协作" }
 ];
 
 export default function Page() {
@@ -701,12 +701,12 @@ export default function Page() {
                   // SYSTEM WORKFLOW (工具软件链)
                 </h3>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-stretch">
                   {softwareStack.map((tool, index) => (
                     <div
                       key={index}
                       onMouseMove={handleMouseMove}
-                      className="liquid-glass-btn p-4 rounded-xl text-left border-white/5 bg-transparent hover:border-white/10 transition-all duration-300 transform hover:scale-[1.02]"
+                      className="liquid-glass-btn h-full p-4 rounded-xl text-left border-white/5 bg-transparent hover:border-white/10 transition-all duration-300 transform hover:scale-[1.02]"
                     >
                       <h4 className="text-xs font-bold text-white tracking-wide">{tool.name}</h4>
                       <p className="text-[11px] text-gray-400 font-light mt-1.5">{tool.desc}</p>
