@@ -495,12 +495,9 @@ export default function Page() {
               direction="top"
               className="block whitespace-nowrap text-white"
             />
-            <BlurText
-              text="IN THE AI ERA."
-              delay={45}
-              animateBy="letters"
-              direction="bottom"
-              className="block whitespace-nowrap bg-gradient-to-r from-gray-200 via-gray-400 to-gray-700 bg-clip-text text-transparent"
+            <span className="block whitespace-nowrap bg-gradient-to-r from-gray-200 via-gray-400 to-gray-700 bg-clip-text text-transparent">
+              IN THE AI ERA.
+            </span>
             />
           </div>
 
