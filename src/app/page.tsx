@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 // 项目数据模型
 interface Project {
@@ -179,11 +179,20 @@ const softwareStack = [
   { name: "Codex / AI Coding", desc: "网站搭建 / 交互原型 / 工作流自动化 / 代码协作" }
 ];
 
+const connectChannels = [
+  { label: 'BILIBILI ↗', href: 'https://space.bilibili.com' },
+  { label: '小红书 ↗', href: 'https://www.xiaohongshu.com' },
+  { label: 'YOUTUBE ↗', href: 'https://www.youtube.com' },
+  { label: 'INSTAGRAM ↗', href: 'https://www.instagram.com' },
+  { label: 'TWITTER / X ↗', href: 'https://x.com' },
+];
+
 export default function Page() {
-  const [activeCategory, setActiveCategory] = useState<string>('all');
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [copied, setCopied] = useState<boolean>(false);
   const [wxCopied, setWxCopied] = useState<boolean>(false);
+  const [aboutInView, setAboutInView] = useState<boolean>(false);
+  const aboutRightRef = useRef<HTMLDivElement | null>(null);
 
   // 滚动进入可视区域动效控制 (Intersection Observer)
   useEffect(() => {
@@ -213,7 +222,33 @@ export default function Page() {
         observer.disconnect();
       }
     };
-  }, [activeCategory]);
+  }, []);
+
+  useEffect(() => {
+    if (aboutInView || !aboutRightRef.current) return;
+
+    const target = aboutRightRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setAboutInView(true);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.25,
+        rootMargin: '0px 0px -10% 0px',
+      }
+    );
+
+    observer.observe(target);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [aboutInView]);
 
   const copyDetailPrompt = (text: string) => {
     const el = document.createElement('textarea');
@@ -248,12 +283,20 @@ export default function Page() {
   const selectedProject = selectedProjectId ? projectsData[selectedProjectId] : null;
 
   const horizontalProjects = Object.values(projectsData).filter(
-    p => p.aspectRatio === 'horizontal' && (activeCategory === 'all' || p.category === activeCategory)
+    p => p.aspectRatio === 'horizontal'
   );
 
   const verticalProjects = Object.values(projectsData).filter(
-    p => p.aspectRatio === 'vertical' && (activeCategory === 'all' || p.category === activeCategory)
+    p => p.aspectRatio === 'vertical'
   );
+
+  const getProjectBadge = (project: Project) => {
+    if (project.format) return project.format.split('/')[0].trim();
+    if (project.category === 'shorts') return 'SHORT FILM';
+    if (project.category === 'commercials') return 'COMMERCIAL';
+    if (project.category === 'prompts') return 'SYSTEM / PROMPTS';
+    return 'PROJECT';
+  };
 
   return (
     <div className="bg-[#050505] text-[#ededed] min-h-screen antialiased relative selection:bg-[#E5A93B]/30 select-none overflow-x-hidden">
@@ -381,20 +424,21 @@ export default function Page() {
 
       {/* Header */}
       <nav className="fixed w-full z-50 bg-[#050505]/75 backdrop-blur-[25px] border-b border-white/5 transition-all duration-1000 ease-out translate-y-0 opacity-100">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center gap-3">
           <div className="flex items-center space-x-3 group cursor-pointer">
             <span className="w-2.5 h-2.5 bg-[#FF3B30] rounded-full rec-dot"></span>
             <span className="text-sm tracking-[0.2em] font-bold text-white uppercase group-hover:text-[#E5A93B] transition duration-300">AIGC.STUDIO</span>
           </div>
-          <div className="space-x-6 text-xs tracking-widest font-mono text-gray-400 flex items-center">
+          <div className="font-mono text-[10px] md:text-xs tracking-[0.12em] md:tracking-[0.25em] text-gray-400 flex items-center gap-3 md:gap-6 whitespace-nowrap">
             <a href="#work-section" className="hover:text-white transition duration-300">01 // WORK</a>
             <a href="#about-section" className="hover:text-white transition duration-300">02 // ABOUT</a>
             <a 
               href="mailto:director@aigc.studio" 
-              className="liquid-glass-btn text-white px-4 py-2 text-xs font-mono tracking-wider rounded-lg"
+              className="liquid-glass-btn text-white px-3 md:px-4 py-1.5 md:py-2 text-[10px] md:text-xs font-mono tracking-[0.08em] md:tracking-wider rounded-lg"
               onMouseMove={handleMouseMove}
             >
-              DIRECT CONTACT
+              <span className="md:hidden">CONTACT</span>
+              <span className="hidden md:inline">DIRECT CONTACT</span>
             </a>
           </div>
         </div>
@@ -475,42 +519,11 @@ export default function Page() {
       {/* Main Grid Section */}
       <section id="work-section" className="pt-32 pb-32 px-6 max-w-7xl mx-auto relative z-10">
         
-        {/* 顶部标题与筛选菜单 (滚动淡入动画) */}
+        {/* 顶部标题 */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 scroll-animate">
           <div>
             <span className="text-xs font-mono text-[#E5A93B] tracking-[0.2em]">// 01 / CINEMATIC ARCHIVES</span>
             <h1 className="text-3xl md:text-5xl font-black text-white mt-2 tracking-tight uppercase">作品目录</h1>
-          </div>
-          
-          <div className="flex flex-wrap gap-3 mt-6 md:mt-0 font-mono text-xs">
-            <button 
-              onClick={() => setActiveCategory('all')} 
-              onMouseMove={handleMouseMove}
-              className={`liquid-glass-btn px-4 py-2 text-xs font-mono tracking-wider rounded-lg transition-all duration-300 ${activeCategory === 'all' ? 'text-white border-[#E5A93B]/40' : 'text-gray-400 border-transparent'}`}
-            >
-              ALL PROJECTS
-            </button>
-            <button 
-              onClick={() => setActiveCategory('shorts')} 
-              onMouseMove={handleMouseMove}
-              className={`liquid-glass-btn px-4 py-2 text-xs font-mono tracking-wider rounded-lg transition-all duration-300 ${activeCategory === 'shorts' ? 'text-white border-[#E5A93B]/40' : 'text-gray-400 border-transparent'}`}
-            >
-              AI FILMS
-            </button>
-            <button 
-              onClick={() => setActiveCategory('commercials')} 
-              onMouseMove={handleMouseMove}
-              className={`liquid-glass-btn px-4 py-2 text-xs font-mono tracking-wider rounded-lg transition-all duration-300 ${activeCategory === 'commercials' ? 'text-white border-[#E5A93B]/40' : 'text-gray-400 border-transparent'}`}
-            >
-              COMMERCIALS
-            </button>
-            <button 
-              onClick={() => setActiveCategory('prompts')} 
-              onMouseMove={handleMouseMove}
-              className={`liquid-glass-btn px-4 py-2 text-xs font-mono tracking-wider rounded-lg transition-all duration-300 ${activeCategory === 'prompts' ? 'text-white border-[#E5A93B]/40' : 'text-gray-400 border-transparent'}`}
-            >
-              SYSTEM / PROMPTS
-            </button>
           </div>
         </div>
 
@@ -521,11 +534,11 @@ export default function Page() {
               <span className="w-1.5 h-1.5 bg-[#E5A93B] rounded-full"></span>
               <h2 className="text-sm font-mono text-[#E5A93B] tracking-[0.25em] uppercase">横屏电影院线 // CINEMATIC REELS (16:9 / 2.39:1)</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+            <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 -mx-2 px-2 md:px-1">
               {horizontalProjects.map((project, index) => (
                 <div 
                   key={project.id} 
-                  className="group cursor-pointer w-full transition-transform duration-500 hover:-translate-y-1 scroll-animate"
+                  className="group cursor-pointer w-[80vw] md:w-[460px] lg:w-[500px] shrink-0 snap-start transition-transform duration-500 hover:-translate-y-1 scroll-animate"
                   style={{ transitionDelay: `${index * 150}ms` } as React.CSSProperties} // 递增卡片级联动效
                   onClick={() => setSelectedProjectId(project.id)}
                 >
@@ -538,7 +551,7 @@ export default function Page() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 pointer-events-none" />
                     <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end font-mono text-[10px] text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div>
-                        <p className="text-[#E5A93B] uppercase">AI TVC</p>
+                        <p className="text-[#E5A93B] uppercase">{getProjectBadge(project)}</p>
                         <p>RATIO: 16:9 // ANAMORPHIC</p>
                       </div>
                       <span className="liquid-glass-btn px-3 py-1.5 text-white rounded-lg text-xs font-mono tracking-wide" onMouseMove={handleMouseMove}>VIEW BLUEPRINT</span>
@@ -581,7 +594,7 @@ export default function Page() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-85 pointer-events-none" />
                     <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end font-mono text-[10px] text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div>
-                        <p className="text-[#E5A93B] uppercase">// VERTICAL PORTRAIT</p>
+                        <p className="text-[#E5A93B] uppercase">{getProjectBadge(project)}</p>
                         <p>RATIO: 9:16 // VERTICAL</p>
                       </div>
                       <span className="liquid-glass-btn px-3 py-1.5 text-white rounded-lg text-xs font-mono tracking-wide" onMouseMove={handleMouseMove}>VIEW BLUEPRINT</span>
@@ -624,7 +637,7 @@ export default function Page() {
           </div>
 
           {/* 右半区：精美极简 AIGC 专业核心技能与工具展示 (滚动淡入动画) */}
-          <div className="lg:col-span-7 flex flex-col justify-between bg-neutral-950 p-8 rounded-2xl border border-white/5 font-mono relative overflow-hidden scroll-animate">
+          <div ref={aboutRightRef} className="lg:col-span-7 flex flex-col justify-between bg-neutral-950 p-8 rounded-2xl border border-white/5 font-mono relative overflow-hidden scroll-animate">
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#E5A93B]/5 rounded-full filter blur-[80px] pointer-events-none" />
             
             <div className="flex-1 flex flex-col justify-center gap-14">
@@ -640,8 +653,10 @@ export default function Page() {
                     <div
                       key={index}
                       onMouseMove={handleMouseMove}
-                      className="liquid-glass-btn scroll-animate h-full p-4 rounded-xl text-left border-white/5 bg-transparent hover:border-white/10 transition-all duration-300 transform hover:scale-[1.02]"
-                      style={{ animationDelay: `${index * 120}ms` } as React.CSSProperties}
+                      className={`liquid-glass-btn h-full p-4 rounded-xl text-left border-white/5 bg-transparent hover:border-white/10 transition-all duration-700 ease-out hover:scale-[1.02] ${
+                        aboutInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                      }`}
+                      style={{ transitionDelay: aboutInView ? `${index * 140}ms` : '0ms' } as React.CSSProperties}
                     >
                       <h4 className="text-xs font-bold text-white tracking-wide">{tool.name}</h4>
                       <p className="text-[11px] text-gray-400 font-light mt-1.5">{tool.desc}</p>
@@ -655,12 +670,10 @@ export default function Page() {
             <div className="mt-4">
               <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">// CONNECT CHANNELS (社交与媒体连接)</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                <a href="https://space.bilibili.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn scroll-animate py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center" style={{ animationDelay: '0ms' } as React.CSSProperties}>BILIBILI ↗</a>
-                <a href="https://www.xiaohongshu.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn scroll-animate py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center" style={{ animationDelay: '100ms' } as React.CSSProperties}>小红书 ↗</a>
-                <a href="https://www.youtube.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn scroll-animate py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center" style={{ animationDelay: '200ms' } as React.CSSProperties}>YOUTUBE ↗</a>
-                <a href="https://www.instagram.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn scroll-animate py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center" style={{ animationDelay: '300ms' } as React.CSSProperties}>INSTAGRAM ↗</a>
-                <a href="https://x.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn scroll-animate py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center" style={{ animationDelay: '400ms' } as React.CSSProperties}>TWITTER / X ↗</a>
-                <button onClick={() => copyWeChatID('aigc_director_wechat')} onMouseMove={handleMouseMove} className="liquid-glass-btn scroll-animate py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center" style={{ animationDelay: '500ms' } as React.CSSProperties}>{wxCopied ? '✓ WX COPIED' : 'WECHAT ↗'}</button>
+                {connectChannels.map((channel, index) => (
+                  <a key={channel.label} href={channel.href} target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className={`liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center transition-all duration-700 ease-out ${aboutInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: aboutInView ? `${index * 100}ms` : '0ms' } as React.CSSProperties}>{channel.label}</a>
+                ))}
+                <button onClick={() => copyWeChatID('aigc_director_wechat')} onMouseMove={handleMouseMove} className={`liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center transition-all duration-700 ease-out ${aboutInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: aboutInView ? `${5 * 100}ms` : '0ms' } as React.CSSProperties}>{wxCopied ? '✓ WX COPIED' : 'WECHAT ↗'}</button>
               </div>
             </div>
 
