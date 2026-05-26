@@ -21,14 +21,6 @@ interface Project {
   grading: string;
 }
 
-// 技能数据模型
-interface SkillItem {
-  title: string;
-  name: string;
-  keywords: string[];
-  description: string;
-}
-
 const projectsData: Record<string, Project> = {
   // 4个横屏电影作品 (16:9 / 2.39:1)
   'cyber-noir': {
@@ -154,34 +146,12 @@ const projectsData: Record<string, Project> = {
   }
 };
 
-// 专业核心能力
-const coreCapabilities: SkillItem[] = [
-  {
-    title: "01 // LATENT COMPOSITION",
-    name: "潜空间镜头与光影掌控",
-    keywords: ["Anamorphic Rules", "Rembrandt Lighting", "Atmospheric Gradients"],
-    description: "基于经典电影美学参数化控制图像生成，精准调度画面镜头焦距、气候介质、光衰减与视野范围，构建具有强质感的院线级画幅资产。"
-  },
-  {
-    title: "02 // TIME-SERIES DIRECTION",
-    name: "多模态时序流镜头控制",
-    keywords: ["Temporal Cohesion", "Fluid Dynamics", "Motion Vectors"],
-    description: "精通 AIGC 时序生成的动力学模拟和镜头平移，能够在高频粒子碰撞与湍流计算下，确保渲染序列的逻辑连贯性与物理真实性。"
-  },
-  {
-    title: "03 // PROMPT ARCHITECTURE",
-    name: "结构化语义编译与调度",
-    keywords: ["Token Weights", "Negative Vectors", "Attention Anchors"],
-    description: "将自然语言创意编译为高度可预测的底层逻辑描述。利用动态权重、负向矢量约束与跨框架语义链，实现视觉品牌资产的精准控制。"
-  }
-];
-
 // 软件堆栈
 const softwareStack = [
-  { name: "Midjourney V6", desc: "高精概念与无瑕关键帧制图" },
-  { name: "ComfyUI & SD", desc: "精密节点流与模型微调训练" },
-  { name: "Runway & Sora", desc: "新一代AI时序动态模拟合成" },
-  { name: "DaVinci Resolve", desc: "影视色彩科学、剪辑后期管线" }
+  { name: "Premiere Pro / After Effects", desc: "剪辑节奏 / 动态包装 / 字幕设计 / 视觉合成" },
+  { name: "DaVinci Resolve", desc: "影像调色 / 颗粒质感 / 色彩管理 / 最终输出" },
+  { name: "TapNow / AI Platform", desc: "AI 视频流程 / 模板化生产 / 内容提效" },
+  { name: "Codex / AI Coding", desc: "网站搭建 / 交互原型 / 工作流自动化 / 代码协作" }
 ];
 
 export default function Page() {
@@ -535,11 +505,10 @@ export default function Page() {
                   onClick={() => setSelectedProjectId(project.id)}
                 >
                   <div className="relative aspect-video w-full overflow-hidden border border-white/5 group-hover:border-white/20 transition-all duration-500 rounded bg-gradient-to-br from-neutral-900 to-[#0c0c0c] scan-overlay">
-                    <video 
-                      src={project.coverSrc} 
-                      muted autoPlay loop playsInline 
-                      className="w-full h-full object-cover opacity-65 group-hover:opacity-85 group-hover:scale-103 transition-all duration-700 bg-neutral-900"
-                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    <img
+                      src={project.coverSrc}
+                      alt={project.title}
+                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-103 transition-all duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80 pointer-events-none" />
                     <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end font-mono text-[10px] text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -579,11 +548,10 @@ export default function Page() {
                   onClick={() => setSelectedProjectId(project.id)}
                 >
                   <div className="relative aspect-[9/16] max-w-[360px] mx-auto overflow-hidden border border-white/5 group-hover:border-white/20 transition-all duration-500 rounded bg-gradient-to-br from-neutral-900 to-[#0c0c0c] scan-overlay">
-                    <video 
-                      src={project.coverSrc} 
-                      muted autoPlay loop playsInline 
-                      className="w-full h-full object-cover opacity-65 group-hover:opacity-85 group-hover:scale-103 transition-all duration-700 bg-neutral-900"
-                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                    <img
+                      src={project.coverSrc}
+                      alt={project.title}
+                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-103 transition-all duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-85 pointer-events-none" />
                     <div className="absolute bottom-4 left-4 right-4 flex justify-between items-end font-mono text-[10px] text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -635,43 +603,6 @@ export default function Page() {
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#E5A93B]/5 rounded-full filter blur-[80px] pointer-events-none" />
             
             <div className="space-y-10">
-              {/* 核心能力展示 */}
-              <div>
-                <h3 className="text-sm font-bold text-white mb-6 uppercase tracking-wider flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E5A93B]"></span>
-                  // CORE CAPABILITIES (核心专业能力)
-                </h3>
-                
-                <div className="space-y-4">
-                  {coreCapabilities.map((skill, index) => (
-                    <div
-                      key={index}
-                      onMouseMove={handleMouseMove}
-                      className="liquid-glass-btn p-5 rounded-xl text-left border-white/5 bg-transparent hover:border-white/10 transition-all duration-300 transform hover:scale-[1.01]"
-                    >
-                      <div className="flex justify-between items-start gap-4">
-                        <div>
-                          <p className="text-[9px] font-mono tracking-widest text-[#E5A93B]">
-                            {skill.title}
-                          </p>
-                          <h4 className="text-base font-bold text-white mt-1 tracking-wide">{skill.name}</h4>
-                        </div>
-                        <div className="flex flex-wrap gap-1">
-                          {skill.keywords.slice(0, 2).map((tag, idx) => (
-                            <span key={idx} className="bg-white/5 text-gray-400 border border-white/5 rounded px-2 py-0.5 text-[8px] font-mono tracking-wider">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      <p className="text-xs text-gray-400 leading-relaxed font-light mt-3">
-                        {skill.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
               {/* 工具软件链展示 */}
               <div>
                 <h3 className="text-sm font-bold text-white mb-6 uppercase tracking-wider flex items-center gap-2">
@@ -679,12 +610,13 @@ export default function Page() {
                   // SYSTEM WORKFLOW (工具软件链)
                 </h3>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-stretch">
                   {softwareStack.map((tool, index) => (
                     <div
                       key={index}
                       onMouseMove={handleMouseMove}
-                      className="liquid-glass-btn p-4 rounded-xl text-left border-white/5 bg-transparent hover:border-white/10 transition-all duration-300 transform hover:scale-[1.02]"
+                      className="liquid-glass-btn h-full p-4 rounded-xl text-left border-white/5 bg-transparent hover:border-white/10 transition-all duration-300 transform hover:scale-[1.02] scroll-animate"
+                      style={{ transitionDelay: `${index * 120}ms` } as React.CSSProperties}
                     >
                       <h4 className="text-xs font-bold text-white tracking-wide">{tool.name}</h4>
                       <p className="text-[11px] text-gray-400 font-light mt-1.5">{tool.desc}</p>
@@ -698,12 +630,12 @@ export default function Page() {
             <div className="mt-12">
               <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">// CONNECT CHANNELS (社交与媒体连接)</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                <a href="https://space.bilibili.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center">BILIBILI ↗</a>
-                <a href="https://www.xiaohongshu.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center">小红书 ↗</a>
-                <a href="https://www.youtube.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center">YOUTUBE ↗</a>
-                <a href="https://www.instagram.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center">INSTAGRAM ↗</a>
-                <a href="https://x.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center">TWITTER / X ↗</a>
-                <button onClick={() => copyWeChatID('aigc_director_wechat')} onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center">{wxCopied ? '✓ WX COPIED' : 'WECHAT ↗'}</button>
+                <a href="https://space.bilibili.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '120ms' } as React.CSSProperties}>BILIBILI ↗</a>
+                <a href="https://www.xiaohongshu.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '240ms' } as React.CSSProperties}>小红书 ↗</a>
+                <a href="https://www.youtube.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '360ms' } as React.CSSProperties}>YOUTUBE ↗</a>
+                <a href="https://www.instagram.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '480ms' } as React.CSSProperties}>INSTAGRAM ↗</a>
+                <a href="https://x.com" target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '600ms' } as React.CSSProperties}>TWITTER / X ↗</a>
+                <button onClick={() => copyWeChatID('aigc_director_wechat')} onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center scroll-animate" style={{ transitionDelay: '720ms' } as React.CSSProperties}>{wxCopied ? '✓ WX COPIED' : 'WECHAT ↗'}</button>
               </div>
             </div>
 
@@ -749,8 +681,8 @@ export default function Page() {
                       </span>
                     </div>
                   </a>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
-                  <div className="absolute bottom-6 left-6 font-mono text-xs text-[#E5A93B]">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none"></div>
+                  <div className="absolute bottom-6 left-6 font-mono text-xs text-[#E5A93B] pointer-events-none">
                     <p>{selectedProject.engine}</p>
                   </div>
                 </div>
