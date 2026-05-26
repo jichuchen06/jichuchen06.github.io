@@ -498,7 +498,6 @@ export default function Page() {
             <span className="block whitespace-nowrap bg-gradient-to-r from-gray-200 via-gray-400 to-gray-700 bg-clip-text text-transparent">
               IN THE AI ERA.
             </span>
-            />
           </div>
 
           <p className="text-lg md:text-xl text-gray-400 max-w-xl font-light leading-relaxed mb-10">
