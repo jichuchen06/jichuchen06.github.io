@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
-import BlurText from '@/components/BlurText';
 
 const CircularGallery = dynamic(() => import('@/components/CircularGallery'), {
   ssr: false,
@@ -13,6 +12,7 @@ const CircularGallery = dynamic(() => import('@/components/CircularGallery'), {
   borderRadius?: number;
   scrollEase?: number;
 }>;
+const AnimatedContent = dynamic(() => import('@/components/AnimatedContent'), { ssr: false });
 
 // 项目数据模型
 interface Project {
@@ -203,8 +203,6 @@ export default function Page() {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [copied, setCopied] = useState<boolean>(false);
   const [wxCopied, setWxCopied] = useState<boolean>(false);
-  const [aboutInView, setAboutInView] = useState<boolean>(false);
-  const aboutRightRef = useRef<HTMLDivElement | null>(null);
 
   // 滚动进入可视区域动效控制 (Intersection Observer)
   useEffect(() => {
@@ -236,31 +234,6 @@ export default function Page() {
     };
   }, []);
 
-  useEffect(() => {
-    if (aboutInView || !aboutRightRef.current) return;
-
-    const target = aboutRightRef.current;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setAboutInView(true);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.25,
-        rootMargin: '0px 0px -10% 0px',
-      }
-    );
-
-    observer.observe(target);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [aboutInView]);
 
   const copyDetailPrompt = (text: string) => {
     const el = document.createElement('textarea');
@@ -294,6 +267,17 @@ export default function Page() {
 
   const selectedProject = selectedProjectId ? projectsData[selectedProjectId] : null;
 
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [selectedProject]);
+
   const horizontalProjects = Object.values(projectsData).filter(
     p => p.aspectRatio === 'horizontal'
   );
@@ -301,11 +285,12 @@ export default function Page() {
   const verticalProjects = Object.values(projectsData).filter(
     p => p.aspectRatio === 'vertical'
   );
-  const gallerySourceProjects = horizontalProjects.length >= 3 ? horizontalProjects : Object.values(projectsData);
-  const galleryItems = gallerySourceProjects.map(project => ({
-    image: project.coverSrc,
-    text: project.title,
-  }));
+  const galleryItems = Object.values(projectsData)
+    .filter((project) => project.aspectRatio === 'horizontal')
+    .map((project) => ({
+      image: project.coverSrc,
+      text: '',
+    }));
 
   const getProjectBadge = (project: Project) => {
     if (project.format) return project.format.split('/')[0].trim();
@@ -501,21 +486,9 @@ export default function Page() {
         <div className="relative z-10 max-w-7xl mx-auto w-full flex-grow flex flex-col justify-center transition-all duration-1000">
           <p className="text-xs font-mono tracking-[0.3em] text-[#E5A93B] mb-6 uppercase animate-pulse">// I am turning imagination into reality</p>
           
-          <div className="text-5xl md:text-8xl font-black tracking-tighter text-white uppercase leading-[0.9] mb-8">
-            <BlurText
-              text="VISUAL WORKS"
-              delay={90}
-              animateBy="letters"
-              direction="top"
-              className="block whitespace-nowrap"
-            />
-            <BlurText
-              text="IN THE AI ERA."
-              delay={70}
-              animateBy="letters"
-              direction="bottom"
-              className="block whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r from-gray-200 via-gray-400 to-gray-700"
-            />
+          <div className="text-5xl md:text-8xl font-black tracking-tight text-white uppercase leading-[0.9] mb-8">
+            <span className="block whitespace-nowrap">VISUAL WORKS</span>
+            <span className="block whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r from-gray-200 via-gray-400 to-gray-700">IN THE AI ERA.</span>
           </div>
 
           <p className="text-lg md:text-xl text-gray-400 max-w-xl font-light leading-relaxed mb-10">
@@ -675,7 +648,7 @@ export default function Page() {
           </div>
 
           {/* 右半区：精美极简 AIGC 专业核心技能与工具展示 (滚动淡入动画) */}
-          <div ref={aboutRightRef} className="lg:col-span-7 flex flex-col justify-between bg-neutral-950 p-8 rounded-2xl border border-white/5 font-mono relative overflow-hidden scroll-animate">
+          <div className="lg:col-span-7 flex flex-col justify-between bg-neutral-950 p-8 rounded-2xl border border-white/5 font-mono relative overflow-hidden scroll-animate">
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#E5A93B]/5 rounded-full filter blur-[80px] pointer-events-none" />
             
             <div className="flex-1 flex flex-col justify-center gap-14">
@@ -688,17 +661,12 @@ export default function Page() {
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-stretch">
                   {softwareStack.map((tool, index) => (
-                    <div
-                      key={index}
-                      onMouseMove={handleMouseMove}
-                      className={`liquid-glass-btn h-full p-4 rounded-xl text-left border-white/5 bg-transparent hover:border-white/10 transition-all duration-700 ease-out hover:scale-[1.02] ${
-                        aboutInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-                      }`}
-                      style={{ transitionDelay: aboutInView ? `${index * 140}ms` : '0ms' } as React.CSSProperties}
-                    >
-                      <h4 className="text-xs font-bold text-white tracking-wide">{tool.name}</h4>
-                      <p className="text-[11px] text-gray-400 font-light mt-1.5">{tool.desc}</p>
-                    </div>
+                    <AnimatedContent key={tool.name} distance={40} direction="vertical" reverse={false} duration={0.75} ease="power3.out" initialOpacity={0} animateOpacity scale={0.98} threshold={0.2} delay={index * 0.12}>
+                      <div onMouseMove={handleMouseMove} className="liquid-glass-btn h-full p-4 rounded-xl text-left border-white/5 bg-transparent hover:border-white/10 transition-all duration-500 ease-out hover:scale-[1.02]">
+                        <h4 className="text-xs font-bold text-white tracking-wide">{tool.name}</h4>
+                        <p className="text-[11px] text-gray-400 font-light mt-1.5">{tool.desc}</p>
+                      </div>
+                    </AnimatedContent>
                   ))}
                 </div>
               </div>
@@ -709,9 +677,13 @@ export default function Page() {
               <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">// CONNECT CHANNELS (社交与媒体连接)</h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {connectChannels.map((channel, index) => (
-                  <a key={channel.label} href={channel.href} target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className={`liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center transition-all duration-700 ease-out ${aboutInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: aboutInView ? `${index * 100}ms` : '0ms' } as React.CSSProperties}>{channel.label}</a>
+                  <AnimatedContent key={channel.label} distance={28} direction="vertical" duration={0.65} ease="power3.out" initialOpacity={0} animateOpacity scale={0.98} threshold={0.25} delay={index * 0.1}>
+                    <a href={channel.href} target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center">{channel.label}</a>
+                  </AnimatedContent>
                 ))}
-                <button onClick={() => copyWeChatID('aigc_director_wechat')} onMouseMove={handleMouseMove} className={`liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center transition-all duration-700 ease-out ${aboutInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: aboutInView ? `${5 * 100}ms` : '0ms' } as React.CSSProperties}>{wxCopied ? '✓ WX COPIED' : 'WECHAT ↗'}</button>
+                <AnimatedContent distance={28} direction="vertical" duration={0.65} ease="power3.out" initialOpacity={0} animateOpacity scale={0.98} threshold={0.25} delay={connectChannels.length * 0.1}>
+                  <button onClick={() => copyWeChatID('aigc_director_wechat')} onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center">{wxCopied ? '✓ WX COPIED' : 'WECHAT ↗'}</button>
+                </AnimatedContent>
               </div>
             </div>
 
@@ -730,11 +702,21 @@ export default function Page() {
 
       {/* Pop-up Detail Overlay */}
       {selectedProject && (
-        <div className="fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl overflow-y-auto flex flex-col justify-center transition-all duration-500 ease-out">
-          <div className="min-h-screen px-6 py-20 flex flex-col justify-center">
-            <div className="max-w-5xl mx-auto w-full relative">
-              <button onClick={() => setSelectedProjectId(null)} onMouseMove={handleMouseMove} className="liquid-glass-btn absolute -top-14 right-0 px-4 py-2 rounded-full text-gray-400 hover:text-white font-mono text-xs tracking-widest flex items-center space-x-2">
-                <span>CLOSE / EXIT ✕</span>
+        <div
+          className="fixed inset-0 z-50 overflow-y-auto overscroll-y-contain bg-black/95 backdrop-blur-2xl transition-all duration-500 ease-out"
+          style={{ WebkitOverflowScrolling: 'touch' }}
+        >
+          <div className="min-h-[100dvh]">
+            <div className="mx-auto w-full max-w-5xl px-6 py-12 md:px-10 md:py-16 relative">
+              <button
+                onClick={() => setSelectedProjectId(null)}
+                onMouseMove={handleMouseMove}
+                className="group liquid-glass-btn sticky top-6 z-50 mb-8 inline-flex items-center gap-3 rounded-full border border-white/15 bg-black/50 px-5 py-2.5 text-xs font-mono uppercase tracking-[0.12em] sm:tracking-[0.18em] text-gray-300 backdrop-blur-md transition-all duration-300 hover:border-[#E5A93B]/60 hover:text-white hover:shadow-[0_0_24px_rgba(229,169,59,0.18)]"
+              >
+                <span className="text-[#E5A93B] transition-transform duration-300 group-hover:-translate-x-1">←</span>
+                <span className="hidden sm:inline">BACK TO WORKS</span>
+                <span className="sm:hidden">BACK</span>
+                <span className="ml-1 text-gray-500 group-hover:text-[#E5A93B]">×</span>
               </button>
               
               {/* 弹窗元素级联动效部分 */}
