@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
+import BlurText from '@/components/BlurText';
 
 const CircularGallery = dynamic(() => import('@/components/CircularGallery'), {
   ssr: false,
@@ -486,9 +487,21 @@ export default function Page() {
         <div className="relative z-10 max-w-7xl mx-auto w-full flex-grow flex flex-col justify-center transition-all duration-1000">
           <p className="text-xs font-mono tracking-[0.3em] text-[#E5A93B] mb-6 uppercase animate-pulse">// I am turning imagination into reality</p>
           
-          <div className="text-5xl md:text-8xl font-black tracking-tight text-white uppercase leading-[0.9] mb-8">
-            <span className="block whitespace-nowrap">VISUAL WORKS</span>
-            <span className="block whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r from-gray-200 via-gray-400 to-gray-700">IN THE AI ERA.</span>
+          <div className="mb-8 text-5xl leading-[0.9] font-black tracking-tight uppercase md:text-8xl">
+            <BlurText
+              text="VISUAL WORKS"
+              delay={55}
+              animateBy="letters"
+              direction="top"
+              className="block whitespace-nowrap text-white"
+            />
+            <BlurText
+              text="IN THE AI ERA."
+              delay={45}
+              animateBy="letters"
+              direction="bottom"
+              className="block whitespace-nowrap bg-gradient-to-r from-gray-200 via-gray-400 to-gray-700 bg-clip-text text-transparent"
+            />
           </div>
 
           <p className="text-lg md:text-xl text-gray-400 max-w-xl font-light leading-relaxed mb-10">
@@ -514,8 +527,8 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full pt-12 md:pt-16 border-t border-white/5">
-          <div className="h-[240px] md:h-[360px] w-full overflow-hidden rounded border border-white/10 bg-black/60">
+        <div className="relative z-10 max-w-7xl mx-auto w-full pt-8 md:pt-10 border-t border-white/5">
+          <div className="relative h-[280px] md:h-[420px] w-full overflow-hidden">
             <CircularGallery
               items={galleryItems}
               bend={3}
@@ -528,7 +541,7 @@ export default function Page() {
       </header>
 
       {/* Main Grid Section */}
-      <section id="work-section" className="pt-32 pb-32 px-6 max-w-7xl mx-auto relative z-10">
+      <section id="work-section" className="pt-20 md:pt-24 pb-32 px-6 max-w-7xl mx-auto relative z-10">
         
         {/* 顶部标题 */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 scroll-animate">
