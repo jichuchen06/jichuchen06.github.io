@@ -194,11 +194,11 @@ const softwareStack = [
 ];
 
 const connectChannels = [
-  { label: 'BILIBILI ↗', href: 'https://space.bilibili.com' },
-  { label: '小红书 ↗', href: 'https://www.xiaohongshu.com' },
-  { label: 'YOUTUBE ↗', href: 'https://www.youtube.com' },
-  { label: 'INSTAGRAM ↗', href: 'https://www.instagram.com' },
-  { label: 'TWITTER / X ↗', href: 'https://x.com' },
+  { label: 'BILIBILI ↗', href: 'https://space.bilibili.com/104260658?spm_id_from=333.1007.0.0' },
+  { label: '小红书 ↗', href: 'https://www.xiaohongshu.com/user/profile/642b0abe0000000010025661' },
+  { label: '新片场 ↗', href: 'https://www.xinpianchang.com/u12444155?channel=copyLink&from=webShare' },
+  { label: 'TAPNOW ↗', href: 'https://app.tapnow.ai/creator/profile/4bb700a8-ad0d-4164-bd3b-b496f349eb06' },
+  { label: '抖音 ↗', href: 'https://x.com' },
 ];
 
 export default function Page() {
@@ -686,14 +686,14 @@ export default function Page() {
               <span className="text-xs font-mono text-[#E5A93B] tracking-[0.2em]">// 02 / VISIONARY INTEL</span>
               <h2 className="text-3xl md:text-5xl font-black text-white mt-2">关于导演。</h2>
               <div className="mt-8 space-y-6 text-gray-400 font-light leading-relaxed">
-                <p>在传统实拍电影向潜空间叙事让步的拐点，作为 “Prompt Director”，我认为文字不仅是表达的媒介，更是雕刻视觉光影的“参数剪刀”。</p>
-                <p>我专注于 AIGC 视觉体系的一致性开发。通过深度整合 Midjourney、Stable Diffusion 控图技巧以及 Runway/Sora 等多模态时序工具，将创意极速转换为好莱坞质感的艺术表达。</p>
+                <p>我拥有从前期策划、现场拍摄到剪辑、调色与 AIGC 视频生成的完整制作经验，能够完成短片、广告、微电影等不同类型影像内容的全流程创作。。</p>
+                <p>在传统影像训练的基础上，我更关注文字、镜头、空间调度与视觉风格之间的关系。对我来说，AIGC 不只是生成工具，而是一套新的影像生产流程：从文本概念出发，通过 AIGC 工具，将创意转化为可落地、可传播的视觉内容。</p>
               </div>
             </div>
 
             {/* 期待开展联合 */}
             <div className="mt-12 pt-8 border-t border-white/5 hidden lg:block">
-              <p className="text-xs text-gray-500">期待开展品牌联合、短片创作与商业顾问</p>
+              <p className="text-xs text-gray-500">期待开展品牌联合、短片创作与商业合作</p>
               <p className="text-lg text-white font-bold mt-1">jichuchen06@gmail.com</p>
             </div>
           </div>
@@ -855,7 +855,7 @@ export default function Page() {
       {/* Footer */}
       <footer className="text-center py-20 border-t border-white/5 text-gray-600 text-xs font-mono tracking-widest uppercase relative z-10">
         <p>© 2026 CRAFTED IN LATENT SPACE. ALL GENERATIONS PRESERVED.</p>
-        <p className="mt-2 text-gray-700">POWERED BY PROMPT ENGINE V6 // DIRECTED VIA NEURAL NETWORKS</p>
+        <p className="mt-2 text-gray-700">POWERED BY CODEX // DIRECTED VIA CHATGPT</p>
       </footer>
     </div>
   );
