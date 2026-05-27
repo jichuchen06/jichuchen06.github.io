@@ -660,7 +660,7 @@ export default function Page() {
 
       {/* About Section */}
       <section id="about-section" className="py-32 px-6 max-w-7xl mx-auto border-t border-white/5 relative z-10 scroll-animate">
-        <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.18] mix-blend-screen">
+        <div className="pointer-events-none absolute inset-0 z-0 opacity-20 mix-blend-screen">
           <ColorBends
             colors={['#E5A93B', '#243B35', '#0F172A']}
             rotation={45}
