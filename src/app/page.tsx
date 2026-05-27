@@ -111,11 +111,8 @@ const projectsData: Record<string, Project> = {
     aspectRatio: 'horizontal',
     engine: '// SYSTEM: COGNITIVE-FLOW_WEATHER_EMULATOR',
     prompt: 'Extreme cinematic wide shot of an automated lithium refinery during an electric blizzard, crackling turquoise lightning bolts striking the towering silver exhaust stacks, dramatic high-contrast atmospheric grading, 35mm cinematic lens --ar 2.39:1',
-    workflow: '在选题初期，我想到创作要立足当下，再结合当今以及自身经历，策划了这部聚焦于当今大学生走出校园后的迷茫和空洞。
-              在色调方面选择偏胶片质感是由于当时受到B站爆火up主阿猪米德的影响，再结合拍摄时选择的室外光线--晴天、阳光明媚，于是策划了这种偏网感、胶片质感的色调风格。',
-    concept: '走出校园的那一刻，又有点儿不知所云，弄不准方向，或许这种状态早就已经存在了，一直在持续着，只不过我没发现罢了。
-              未知、迷茫、（焦虑）。我好像在新手村呆了很久一样，没有什么领路人，也没有翻阅什么攻略，仅凭我独自摸索，但，没有目的的摸索会达到目的吗？还是说，哪天会柳暗花明又一村？
-              找我不知道要找的东西，寻我不清楚要寻的方向……',
+    workflow: '在选题初期，我想到创作要立足当下，再结合当今以及自身经历，策划了这部聚焦于当今大学生走出校园后的迷茫和空洞。在色调方面选择偏胶片质感是由于当时受到B站爆火up主阿猪米德的影响，再结合拍摄时选择的室外光线--晴天、阳光明媚，于是策划了这种偏网感、胶片质感的色调风格。',
+    concept: '走出校园的那一刻，又有点儿不知所云，弄不准方向，或许这种状态早就已经存在了，一直在持续着，只不过我没发现罢了。未知、迷茫、（焦虑）。我好像在新手村呆了很久一样，没有什么领路人，也没有翻阅什么攻略，仅凭我独自摸索，但，没有目的的摸索会达到目的吗？还是说，哪天会柳暗花明又一村？找我不知道要找的东西，寻我不清楚要寻的方向……',
     role: '编导 / 摄影 / 剪辑 / 调色',
     pipeline: 'Sony A7M4 + DaVinci Resolve',
     duration: '04:26',
@@ -159,7 +156,7 @@ const projectsData: Record<string, Project> = {
     workflow: '-',
     concept: '-',
     role: '文案 / 制作',
-    pipeline: '-,
+    pipeline: '-',
     duration: '00:30',
     format: '工具类教程 / 竖屏 9:16',
     visualStrategy: '教程视频 / AI / 品牌推广',
