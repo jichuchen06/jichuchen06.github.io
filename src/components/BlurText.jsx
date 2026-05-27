@@ -8,6 +8,7 @@ function BlurText({
   animateBy = 'letters',
   direction = 'bottom',
   className = '',
+  segmentClassName = '',
 }) {
   const units = animateBy === 'words' ? text.split(' ') : Array.from(text);
   const fromY = direction === 'top' ? '-0.7em' : '0.7em';
@@ -19,7 +20,7 @@ function BlurText({
         return (
           <span
             key={`${unit}-${index}`}
-            className="blur-text-unit"
+            className={`blur-text-unit inline-block will-change-[transform,filter,opacity] ${segmentClassName}`}
             style={{
               animationDelay: `${index * delay}ms`,
               '--blur-from-y': fromY,

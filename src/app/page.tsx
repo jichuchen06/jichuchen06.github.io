@@ -14,6 +14,7 @@ const CircularGallery = dynamic(() => import('@/components/CircularGallery'), {
   scrollEase?: number;
 }>;
 const AnimatedContent = dynamic(() => import('@/components/AnimatedContent'), { ssr: false });
+const ColorBends = dynamic(() => import('@/components/ColorBends'), { ssr: false });
 
 // 项目数据模型
 interface Project {
@@ -495,9 +496,14 @@ export default function Page() {
               direction="top"
               className="block whitespace-nowrap text-white"
             />
-            <span className="block whitespace-nowrap bg-gradient-to-r from-gray-200 via-gray-400 to-gray-700 bg-clip-text text-transparent">
-              IN THE AI ERA.
-            </span>
+            <BlurText
+              text="IN THE AI ERA."
+              delay={45}
+              animateBy="letters"
+              direction="bottom"
+              className="block whitespace-nowrap"
+              segmentClassName="bg-gradient-to-r from-gray-200 via-gray-400 to-gray-700 bg-clip-text text-transparent"
+            />
           </div>
 
           <p className="text-lg md:text-xl text-gray-400 max-w-xl font-light leading-relaxed mb-10">
@@ -538,7 +544,24 @@ export default function Page() {
 
       {/* Main Grid Section */}
       <section id="work-section" className="pt-20 md:pt-24 pb-32 px-6 max-w-7xl mx-auto relative z-10">
-        
+        <div className="pointer-events-none absolute inset-0 z-0 opacity-20 mix-blend-screen">
+          <ColorBends
+            colors={['#E5A93B', '#1F3A34', '#6B7280']}
+            rotation={90}
+            speed={0.12}
+            scale={1.15}
+            frequency={0.75}
+            warpStrength={0.6}
+            mouseInfluence={0.25}
+            noise={0.08}
+            parallax={0.25}
+            iterations={1}
+            intensity={0.7}
+            bandWidth={5}
+            transparent
+          />
+        </div>
+        <div className="relative z-10">
         {/* 顶部标题 */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 scroll-animate">
           <div>
@@ -632,10 +655,29 @@ export default function Page() {
             </div>
           </div>
         )}
+        </div>
       </section>
 
       {/* About Section */}
       <section id="about-section" className="py-32 px-6 max-w-7xl mx-auto border-t border-white/5 relative z-10 scroll-animate">
+        <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.18] mix-blend-screen">
+          <ColorBends
+            colors={['#E5A93B', '#243B35', '#0F172A']}
+            rotation={45}
+            speed={0.08}
+            scale={1.25}
+            frequency={0.6}
+            warpStrength={0.45}
+            mouseInfluence={0.2}
+            noise={0.06}
+            parallax={0.2}
+            iterations={1}
+            intensity={0.55}
+            bandWidth={6}
+            transparent
+          />
+        </div>
+        <div className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           
           {/* 左半区：导演简介 (滚动淡入动画) */}
@@ -684,15 +726,19 @@ export default function Page() {
             {/* 社交媒体矩阵 */}
             <div className="mt-4">
               <h3 className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">// CONNECT CHANNELS (社交与媒体连接)</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
                 {connectChannels.map((channel, index) => (
-                  <AnimatedContent key={channel.label} distance={28} direction="vertical" duration={0.65} ease="power3.out" initialOpacity={0} animateOpacity scale={0.98} threshold={0.25} delay={index * 0.1}>
-                    <a href={channel.href} target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center">{channel.label}</a>
-                  </AnimatedContent>
+                  <div key={channel.label} className="w-full">
+                    <AnimatedContent distance={28} direction="vertical" duration={0.65} ease="power3.out" initialOpacity={0} animateOpacity scale={0.98} threshold={0.25} delay={index * 0.1}>
+                      <a href={channel.href} target="_blank" rel="noreferrer" onMouseMove={handleMouseMove} className="liquid-glass-btn flex h-11 w-full items-center justify-center rounded-xl border border-white/10 px-4 text-center text-xs font-mono uppercase tracking-[0.18em] text-gray-200 transition-all duration-300 hover:border-[#E5A93B]/50 hover:text-white">{channel.label}</a>
+                    </AnimatedContent>
+                  </div>
                 ))}
-                <AnimatedContent distance={28} direction="vertical" duration={0.65} ease="power3.out" initialOpacity={0} animateOpacity scale={0.98} threshold={0.25} delay={connectChannels.length * 0.1}>
-                  <button onClick={() => copyWeChatID('aigc_director_wechat')} onMouseMove={handleMouseMove} className="liquid-glass-btn py-3 px-4 rounded-xl text-center text-xs tracking-wider flex items-center justify-center">{wxCopied ? '✓ WX COPIED' : 'WECHAT ↗'}</button>
-                </AnimatedContent>
+                <div className="w-full">
+                  <AnimatedContent distance={28} direction="vertical" duration={0.65} ease="power3.out" initialOpacity={0} animateOpacity scale={0.98} threshold={0.25} delay={connectChannels.length * 0.1}>
+                    <button onClick={() => copyWeChatID('aigc_director_wechat')} onMouseMove={handleMouseMove} className="liquid-glass-btn flex h-11 w-full items-center justify-center rounded-xl border border-white/10 px-4 text-center text-xs font-mono uppercase tracking-[0.18em] text-gray-200 transition-all duration-300 hover:border-[#E5A93B]/50 hover:text-white">{wxCopied ? '✓ WX COPIED' : 'WECHAT ↗'}</button>
+                  </AnimatedContent>
+                </div>
               </div>
             </div>
 
@@ -706,6 +752,7 @@ export default function Page() {
             </div>
           </div>
 
+        </div>
         </div>
       </section>
 
