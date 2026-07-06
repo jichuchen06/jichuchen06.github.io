@@ -1,3 +1,4 @@
+import IntroSplash from '@/components/v2/IntroSplash';
 import HeroV2 from '@/components/v2/HeroV2';
 import WorkGridV2 from '@/components/v2/WorkGridV2';
 import AboutV2 from '@/components/v2/AboutV2';
@@ -9,6 +10,7 @@ export default function Page() {
 
   return (
     <main className="min-h-screen overflow-x-hidden bg-[#050505] text-white selection:bg-[#E5A93B]/30">
+      <IntroSplash />
       <div className="film-grain opacity-60" />
       <HeroV2 featuredProjects={featuredProjects} />
       <WorkGridV2 projects={projects} />
