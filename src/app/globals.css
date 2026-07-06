@@ -64,3 +64,226 @@ body {
 ::-webkit-scrollbar-track { background: #050505; }
 ::-webkit-scrollbar-thumb { background: #222; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--color-accent-amber); }
+
+
+/* Intro Cut Loading Transition */
+.intro-cut {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  overflow: hidden;
+  background: #050505;
+  animation: introCutRemove 2.6s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+.intro-cut__black {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at center, rgba(229, 169, 59, 0.045), transparent 28%),
+    #050505;
+}
+
+.intro-cut__loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(72vw, 780px);
+  height: 120px;
+  transform: translate(-50%, -50%) rotate(-8deg);
+}
+
+.intro-cut__line {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0%;
+  height: 2px;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(229, 169, 59, 0.15) 8%,
+    rgba(229, 169, 59, 0.95) 50%,
+    rgba(229, 169, 59, 0.15) 92%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 12px rgba(229, 169, 59, 0.75),
+    0 0 38px rgba(229, 169, 59, 0.35);
+  animation: introLineLoad 1.05s cubic-bezier(0.76, 0, 0.24, 1) 0.25s forwards;
+}
+
+.intro-cut__glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0%;
+  height: 38px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(229, 169, 59, 0.24),
+    rgba(229, 169, 59, 0.08) 38%,
+    transparent 72%
+  );
+  filter: blur(10px);
+  animation: introGlowLoad 1.05s cubic-bezier(0.76, 0, 0.24, 1) 0.25s forwards;
+}
+
+.intro-cut__aperture {
+  position: absolute;
+  left: -15%;
+  width: 130%;
+  height: 55%;
+  background: #050505;
+  z-index: 2;
+  transform-origin: center;
+}
+
+.intro-cut__aperture--top {
+  top: -5%;
+  transform: rotate(-8deg) translateY(0);
+  animation: introApertureTop 1.1s cubic-bezier(0.76, 0, 0.24, 1) 1.15s forwards;
+}
+
+.intro-cut__aperture--bottom {
+  bottom: -5%;
+  transform: rotate(-8deg) translateY(0);
+  animation: introApertureBottom 1.1s cubic-bezier(0.76, 0, 0.24, 1) 1.15s forwards;
+}
+
+.intro-cut__text {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 78px);
+  z-index: 3;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: rgba(229, 169, 59, 0.78);
+  text-transform: uppercase;
+  opacity: 0;
+  animation: introTextPulse 1.4s ease-out 0.35s forwards;
+}
+
+.intro-cut__text strong {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 700;
+}
+
+.intro-cut__grain {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  opacity: 0.13;
+  mix-blend-mode: overlay;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+@keyframes introLineLoad {
+  0% {
+    width: 0%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes introGlowLoad {
+  0% {
+    width: 0%;
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes introApertureTop {
+  0% {
+    transform: rotate(-8deg) translateY(0);
+  }
+  100% {
+    transform: rotate(-8deg) translateY(-120%);
+  }
+}
+
+@keyframes introApertureBottom {
+  0% {
+    transform: rotate(-8deg) translateY(0);
+  }
+  100% {
+    transform: rotate(-8deg) translateY(120%);
+  }
+}
+
+@keyframes introTextPulse {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateX(-50%) translateY(8px);
+  }
+  22% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(-50%) translateY(0);
+  }
+  68% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateX(-50%) translateY(-6px);
+  }
+}
+
+@keyframes introCutRemove {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  82% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 640px) {
+  .intro-cut__loader {
+    width: 82vw;
+    height: 96px;
+    transform: translate(-50%, -50%) rotate(-9deg);
+  }
+
+  .intro-cut__text {
+    top: calc(50% + 60px);
+    flex-direction: column;
+    gap: 6px;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+  }
+}
