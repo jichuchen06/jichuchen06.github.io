@@ -8,7 +8,7 @@ export default function IntroSplash() {
   useEffect(() => {
     const timer = window.setTimeout(() => {
       setVisible(false);
-    }, 2200);
+    }, 2600);
 
     return () => window.clearTimeout(timer);
   }, []);
@@ -16,19 +16,23 @@ export default function IntroSplash() {
   if (!visible) return null;
 
   return (
-    <div className="intro-splash" aria-hidden="true">
-      <div className="intro-splash__base" />
+    <div className="intro-cut" aria-hidden="true">
+      <div className="intro-cut__black" />
 
-      <div className="intro-splash__panel intro-splash__panel--gold" />
-      <div className="intro-splash__panel intro-splash__panel--dark" />
-      <div className="intro-splash__slash" />
-
-      <div className="intro-splash__content">
-        <p className="intro-splash__eyebrow">VISUAL ARCHIVE INITIALIZING</p>
-        <h1 className="intro-splash__title">AIGC.STUDIO</h1>
+      <div className="intro-cut__loader">
+        <div className="intro-cut__line" />
+        <div className="intro-cut__glow" />
       </div>
 
-      <div className="intro-splash__grain" />
+      <div className="intro-cut__aperture intro-cut__aperture--top" />
+      <div className="intro-cut__aperture intro-cut__aperture--bottom" />
+
+      <div className="intro-cut__text">
+        <span>VISUAL ARCHIVE</span>
+        <strong>INITIALIZING</strong>
+      </div>
+
+      <div className="intro-cut__grain" />
     </div>
   );
 }
